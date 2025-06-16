@@ -1,6 +1,5 @@
 # Born 2 be Root
 
-<<<<<<< HEAD
 O projeto consiste em criar uma maquina virtual. (AJUSTAR RESUMO!!)
 
 ## 1 - Hypervisor
@@ -43,7 +42,7 @@ Rocky e Debian
 
 ### Instalar Debian
 
-No (site_oficial)[www.debian.org/download] selecionar 'amd64 debian-12.11.0...', baixará arquivos.
+No [site_oficial](www.debian.org/download) selecionar 'amd64 debian-12.11.0...', baixará arquivos.
 
 > O download tera erro caso o Caso o pc nao tenha espaco para baixar o arquivo, o arquivo principal nao sera baixado
 
