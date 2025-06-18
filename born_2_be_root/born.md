@@ -31,14 +31,18 @@ Após baixar o arquivo, incluir o arquivo na pasta `home\sgoinfre`, diretório c
 Abrir um programa no computador chamado: Oracle VM VirtualBox Manager. 
 
 
+
+
+
 **Resumo -> Instalar Debian** 
+
 Etapa | . | Pra que serve?
--|-|-|-
-1. Instalar Debian | [site_oficial](www.debian.org/download) selecionar `amd64 debian-12.11.0...` | Gera um arquivo ISO
-2. Arquivo ISO | . | Gerado após realizar o download
-3. Transferir ISO | Vai para a pasta `home\sgoinfre` | Diretòrio com maior espaço
-4. Abrir VirtualBox | Um programa que ja esta instalado no pc | serve para realizar a leitura do arquivo ISO
-5. 
+-|-|-
+1 [Instalar Debian](www.debian.org/download) | selecionar `amd64 debian-12.11.0...` | Gera um arquivo ISO
+2 Arquivo ISO | . | Gerado após realizar o download
+3 Transferir ISO | Vai para a pasta `home\sgoinfre` | Diretòrio com maior espaço
+4 Abrir VirtualBox | Um programa que ja esta instalado no pc | serve para realizar a leitura do arquivo ISO
+5 
 
 
 ______________________________
