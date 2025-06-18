@@ -14,9 +14,10 @@ Tipo | Nome | Utilizado em | Exemplos
 
 ## 2 - Distribuiçao Linux
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!
 VERIFICAR DIFERENCA ENTRE AMBOS
 Rocky e Debian
+
 
 ### Instalar Debian
 
@@ -48,8 +49,32 @@ FOTO!
 
 Proxima etapa, alocar memoria:
 
-- Base Memory:
-- Process: 
+- Base Memory: 1024mb 
+- Processors: 1 
+
+**Base Memory**
+
+> RAM = Random Access Memory (memoria de curto prazo do computador)
+
+- Memoria temporaria usada por programas abertos
+- Quanto mais RAM, mais programas podem rodar ao mesmo tempo.
+- A RAM 'e encerrada ao desligar o pc.
+
+**Processors**
+
+> O processador é o cérebro da máquina.
+> Os núcleos são como mini-cérebros dentro dele.
+
+- O processador executa tarefas.
+- Núcleos = tarefas paralelas possíveis.
+
+!!!
+
+APRENDER MAIS!!!!!!
+
+
+
+
 
 _________________________________________
 
