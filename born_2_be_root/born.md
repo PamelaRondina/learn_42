@@ -28,21 +28,41 @@ No [site_oficial](www.debian.org/download) selecionar `amd64 debian-12.11.0...`,
 
 Após baixar o arquivo, incluir o arquivo na pasta `home\sgoinfre`, diretório com maior espaço para realizar esse projeto.
 
-Abrir um programa no computador chamado: Oracle VM VirtualBox Manager. 
+Abrir um programa no computador chamado: `Oracle VM VirtualBox Manager` e clicar em `New`.
 
+- Name: Nomeie sua VM;
+- Folder: Selecione o local de armazenamento;
+- ISO Image: Escolha o arquivo download ISO.
+- Ticar `Skip Unattended Installation`, (pular instalacao nao assistida): 
 
+**Skip Unattended Installation**
+ 
+Quando nao marcamos (ticamos) esse elemento, o VirtualBox tenta automatizar o processo de instalacao do sistema operacional, exemplos:
+* Cria um usuário automaticamente;
+* Define senha root por padrão
+* Pula a tela de seleção de idioma, teclado, fuso horário...
 
+A ideia do projeto 'e para criarmos todos esses elementos.
+
+FOTO!
+
+Proxima etapa, alocar memoria:
+
+- Base Memory:
+- Process: 
+
+_________________________________________
 
 
 **Resumo -> Instalar Debian** 
 
 Etapa | . | Pra que serve?
 -|-|-
-1 [Instalar Debian](www.debian.org/download) | selecionar `amd64 debian-12.11.0...` | Gera um arquivo ISO
+1 [baixar Debian](www.debian.org/download) | selecionar `amd64 debian-12.11.0...` | Gera um arquivo ISO
 2 Arquivo ISO | . | Gerado após realizar o download
 3 Transferir ISO | Vai para a pasta `home\sgoinfre` | Diretòrio com maior espaço
 4 Abrir VirtualBox | Um programa que ja esta instalado no pc | serve para realizar a leitura do arquivo ISO
-5 
+5 ETAPA NEW
 
 
 ______________________________
