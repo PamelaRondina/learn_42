@@ -134,19 +134,34 @@ Loading | ...
 `Configuring grub-pc` | YES (carregador de Boot)
 `Configuring grub-pc --> Device for boot...` | /dev/sda
 Loading | ...
-`Finish the installation` | Continue e fim.
-
-
-
+`Finish the installation` | Continue e VM criada! :)
 
 Questions:
 1. POr que estou separando as particoes??
 2. O que 'e carregador de Boot? Sistema operacional??
-3. 
+
+### Acessar a VM
+
+Apos as configuracoes da VM e Particoes, chegou o momento de acessar a maquina, assim que finalizamos o passo anterior abrir'a um terminal:
+
+Etapa | O que fazer...
+-|-
+Solicitar a senha encriptada | @Ilovebolocenoura42
+hotname da maquina | prondina42
+nome do usuario | Pamela Rondina
+login | username --> prondina 
+senha | criada anteriormente
+comando `lsblk` | Mostra no terminal 
+
+### Instalar Sudo
 
 
 
+### Comandos 
 
+Comandos| O que faz...
+-|-
+`lsblk` | Mostra no terminal as particoes e LVM??
 
 _________________________________________
 
@@ -163,10 +178,12 @@ Etapa | . | Pra que serve?
 
 ______________________________
 
-Referencias | url
+Referencias | link
 -|-
-Guide | [born2beroot](https://github.com/chlimous/42-born2beroot_guide)
 Instalar | [Debian](www.debian.org/distrib/netinst)
-VIDEO YOUTUBE ADICIONAR | 
+Guide | [born2beroot](https://github.com/chlimous/42-born2beroot_guide)
+Nirmal Gope - Part 1 | [Youtube - Mandatory Part](https://www.youtube.com/watch?v=s2eM7L_etzo) 
+Nirmal Gope - Part 2 | [Youtube - Mandatory Part](https://www.youtube.com/watch?v=3Vw0HlJHLTQ) 
+
 
 
