@@ -155,13 +155,46 @@ comando `lsblk` | Mostra no terminal
 
 ### Instalar Sudo
 
+> `sudo`: permite o usuário executar comandos com privilégios de root.
 
-
-### Comandos 
-
-Comandos| O que faz...
+Etapa | O que faz...
 -|-
-`lsblk` | Mostra no terminal as particoes e LVM??
+`su -` | alterar para o root (incluir senha)
+`apt update` | atualiza a lista de pacotes disponiveis nos repositorios
+`apt install sudo` | instalar o pacote sudo, que permite executar comandos como root sem usar o `su -`
+`adduser prondina sudo` | passar o usuario para sudo
+`getent group sudo` | mostra quem está no grupo sudo 
+`reboot` | reinicia o sistema com seguranca 
+
+Em seguida, a VM vai reiniciar e solicitara as senhas para acesso. Acessar novamente e verificar a versao do sudo.
+
+> Agora liberado pois foi configurado o user para o grupo sudo.
+
+**Configurar SUDO**
+
+Etapa | O que faz...
+-|-
+`sudo -V` | alterar para o root (incluir senha)
+`sudo visudo` | 
+
+
+
+
+### 💻 Comandos básicos de gerenciamento Debian
+
+ Comando | Explicação 
+-|-|
+`lsblk` | lista os discos e partições conectadas 
+**SUDO** | ------
+`su -` | alterar do usuario atual para o root
+`apt` | gerenciador de pacotes do Debian/Ubuntu
+`apt update` | atualiza a lista de pacotes disponíveis 
+`apt install sudo` | instala o pacote sudo 
+`adduser user sudo` | adiciona um usuário já criado ao grupo sudo 
+`getent group sudo` | mostra quem está no grupo sudo 
+`reboot` | reinicia o sistema com seguranca 
+`sudo -V` | versao do sudo
+**SSH** | ----------
 
 _________________________________________
 
