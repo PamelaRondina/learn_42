@@ -87,7 +87,7 @@ Proxima e ultima etapa, `Virtual Hard Disk`
 
 ### Operar Sistema de Instalacao
 
-Etapa | Pra que serve?
+Etapa | O que fazer...
 -|-
 `Start` | iniciar a maquina
 `Install` | iniciar a instalacao do Debian
@@ -113,9 +113,38 @@ Questions:
 
 ### Particoes
 
-Etapa | Pra que serve?
+Etapa | O que fazer...
 -|-
-`Partition disks` | Guided - use entire disk
+`Partition disks` | Guided - use entire disk and set up encrypyted LVM
+`Partition disks --> Select disl to partition` | SCSI2 ... (a opcao que ja aparece)
+`Partition disks --> Partitioning scheme` | Separate / home partition
+Loading | ...
+`Partition disks --> Encryption passphrase` | senha importante, cada start da VM ela sera utilizada ex: @Ilovebolocenoura42
+`Partition disks --> amount of volume...` | max (atalho para especificar o tamanho m'aximo)
+Loading | ...
+`Partition disks` | Finish partitioning...
+`Partition disks` | Write the changes to disk? YES
+Loading | ...
+`Configure the package manager` | etapa de inserir midia, no momento cique em NO
+`Configure the package manager --> Debian archive...` | vai espelhar o arquivo Debian da regiao --> Portugal \ deb.debian.org
+`Configure the package manager --> HTTP...` | pule essa etapa (press Enter)
+Loading | ...
+`Software selection` | tire todos os tiques
+Loading | ...
+`Configuring grub-pc` | YES (carregador de Boot)
+`Configuring grub-pc --> Device for boot...` | /dev/sda
+Loading | ...
+`Finish the installation` | Continue e fim.
+
+
+
+
+Questions:
+1. POr que estou separando as particoes??
+2. O que 'e carregador de Boot? Sistema operacional??
+3. 
+
+
 
 
 
@@ -138,5 +167,6 @@ Referencias | url
 -|-
 Guide | [born2beroot](https://github.com/chlimous/42-born2beroot_guide)
 Instalar | [Debian](www.debian.org/distrib/netinst)
+VIDEO YOUTUBE ADICIONAR | 
 
 
