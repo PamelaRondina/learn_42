@@ -15,6 +15,7 @@ Tipo | Nome | Utilizado em | Exemplos
 ## 2 - Distribuiçao Linux
 
 !!!!!!!!
+
 VERIFICAR DIFERENCA ENTRE AMBOS
 Rocky e Debian
 
@@ -74,15 +75,17 @@ APRENDER MAIS!!!!!!
 
 Proxima e ultima etapa, `Virtual Hard Disk`
 
-- criar com 8gb.
--  Deixe a opção **"Pre-allocate Full size" MARCADA**.
+- Criar com 8gb.
+- Deixe a opção **"Pre-allocate Full size" MARCADA**.
 
 !!!
 
 - Marcar a opção, o VirtualBox já separa 8 GB de espaço físico no computador, mesmo que o Debian só use 1 GB por enquanto.
-    - 
 - NÃO marcar, vai ocupar espaço aos poucos, conforme o Debian for precisando.
 
+### Operar Sistema de Instalacao
+
+- Clicar em Start
 _________________________________________
 
 
