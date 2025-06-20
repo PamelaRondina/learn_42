@@ -190,6 +190,25 @@ Etapa | O que faz...
 `sudo mkdir -p /va/log/sudo` | criar diretorio
 `sudo touch /var/log/sudo/sudo.log` | criar arquivo de logs
 
+### Configurar SSH
+
+Etapa | O que faz...
+-|-
+`sudo apt install openssh-server -y` | Pacote de servidor que permite acessar a VM remotamente via terminal
+`sudo nano /etc/ssh/sshd_config` | abre as configuracoes do ssh
+`#Port 22` | Alterar para `Port 4242`
+`#PermitRootLogin prohibit-passwaord` | Alterar para `PermitRootLogin no` --> salvar e sair
+`sudo service ssh status` | verifica o status do serviço SSH
+
+### Configurar UFW
+
+Etapa | O que faz...
+-|-
+`sudo apt install ufw -y` | Pacote de servidor que permite ferramenta simples de firewall, que controla o tráfego de entrada e saída da sua máquina Linux.
+`sudo ufw enable` | ativar o firewall
+`sudo ufw allow 4242` | permitir acesso a porta 4242 do SSH
+`sudo ufw status` | visualizar o status das portas ALLOW (permitir)
+
 
 
 
@@ -207,8 +226,17 @@ Etapa | O que faz...
 `getent group sudo` | mostra quem está no grupo sudo 
 `reboot` | reinicia o sistema com seguranca 
 `sudo -V` | versao do sudo
+`sudo mkdir -p /va/log/sudo` | criar diretorio
+`sudo touch /var/log/sudo/sudo.log` | criar arquivo de logs
 **SSH** | ----------
-
+`sudo apt install openssh-server -y` |pacote de servidor que permite acessar a VM remotamente via terminal
+`sudo nano /etc/ssh/sshd_config` | abre as configuracoes do ssh
+`sudo service ssh status` | verifica o status do serviço SSH
+**UFW** | -----------
+`sudo apt install ufw -y` | Pacote de servidor que permite ferramenta simples de firewall, que controla o tráfego de entrada e saída da sua máquina Linux.
+`sudo ufw enable` | ativar o firewall
+`sudo ufw allow 4242` | permitir acesso a porta 4242 do SSH
+`sudo ufw status` | visualizar o status das portas ALLOW (permitir)
 _________________________________________
 
 **Resumo -> Instalar Debian** 
