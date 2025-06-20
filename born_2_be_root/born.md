@@ -33,8 +33,8 @@ Após baixar o arquivo, incluir o arquivo na pasta `home\sgoinfre`, diretório c
 Abrir um programa no computador chamado: `Oracle VM VirtualBox Manager` e clicar em `New`.
 
 - Name: Nomeie sua VM;
-- Folder: Selecione o local de armazenamento;
-- ISO Image: Escolha o arquivo download ISO.
+- Folder: Selecione o local de armazenamento: `pasta sgoinfre`;
+- ISO Image: Escolha o arquivo download ISO (que deve estar na sgoinfre).
 - Ticar `Skip Unattended Installation`, (pular instalacao nao assistida): 
 
 **Skip Unattended Installation**
@@ -52,6 +52,8 @@ Proxima etapa, alocar memoria:
 
 - Base Memory: 1024mb 
 - Processors: 1 
+- NAO ticar `Enable EFI`
+     - Extensible Firmware Interface (Ele pode causar problemas no boot ou dificultar instalações mais simples, como a do Debian.)
 
 **Base Memory**
 
@@ -85,9 +87,39 @@ Proxima e ultima etapa, `Virtual Hard Disk`
 
 ### Operar Sistema de Instalacao
 
-- Clicar em Start
-_________________________________________
+Etapa | Pra que serve?
+-|-
+`Start` | iniciar a maquina
+`Install` | iniciar a instalacao do Debian
+`Select language` | English
+`Select your location` | others / Europe / Portugal
+`Configure locales` | United States
+`Configure the keyboard` | American English
+Loading | ...
+`Configure the network --> Hostname` | hostname da maquina virtual: **username + 42**
+`Configure the network --> Domain name` | pular etapa
+`Set up users and passwords --> new password` | Por enquanto, qualquer senha (grave-a!)
+Repita a senha | na proxima etapa
+`Set up users and passwords --> full name...` | O nome do usuario = Pamela Rondina
+`Set up users and passwords --> username for your account` | username
+`Set up users and passwords --> choose a password for the new user` | Por enquanto, qualquer senha (grave-a!)
+`Configure the clock` | Lisbon
+Loading | ...
 
+Questions:
+
+1. O QUE 'E HOSTNAME??
+2. Por que pular Domain Name??
+
+### Particoes
+
+Etapa | Pra que serve?
+-|-
+`Partition disks` | Guided - use entire disk
+
+
+
+_________________________________________
 
 **Resumo -> Instalar Debian** 
 
