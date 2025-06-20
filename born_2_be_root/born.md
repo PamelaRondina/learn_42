@@ -199,6 +199,9 @@ Etapa | O que faz...
 `#Port 22` | Alterar para `Port 4242`
 `#PermitRootLogin prohibit-passwaord` | Alterar para `PermitRootLogin no` --> salvar e sair
 `sudo service ssh status` | verifica o status do serviço SSH
+`sudo service ssh restart` | reiniciar o SSH devido a nova porta
+
+
 
 ### Configurar UFW
 
@@ -208,6 +211,27 @@ Etapa | O que faz...
 `sudo ufw enable` | ativar o firewall
 `sudo ufw allow 4242` | permitir acesso a porta 4242 do SSH
 `sudo ufw status` | visualizar o status das portas ALLOW (permitir)
+
+### Conectando...
+
+**VM via SSH Port 4242**
+
+Etapa | O que faz...
+-|-
+`ssh prondina@127.0.0.1 -p 4242` | conectar
+solicitara senha | yes
+`exit` | para sair
+
+**SSH de fora do terminal da VM Port 4242**
+
+No app `Oracle VM VirtualBox Manager`.
+
+Etapa | O que faz...
+-|-
+`Settings` | ...
+`Network` | clicar em Advanced\port Forwarding
+`+` | Name: rule 1 \ Host Port: 4242 \ Guest Port: 4242
+OK e OK | 
 
 
 
