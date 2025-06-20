@@ -175,7 +175,20 @@ Em seguida, a VM vai reiniciar e solicitara as senhas para acesso. Acessar novam
 Etapa | O que faz...
 -|-
 `sudo -V` | alterar para o root (incluir senha)
-`sudo visudo` | 
+**CONFIGURACOES SUDO** | ---------
+`sudo visudo` | abre as configuracoes do Sudo --> TODOS com `Defaults+(TAB)` (padrao)
+`env_reset` | ja consta
+`mail_badpass` | ja consta 
+`passwd_tries=3` | 3 tentativas para conectar ao sudo
+`badpass_message="QUALQUER TEXTO."` | Exibe uma mensagem personalizada ao usar uma senha errada com o sudo.
+`logfile="/var/log/sudo/sudo.log"` | Define o arquivo de logs de entrada
+`log_input, log_output` | entrada de logs e saída de logs
+`iolog_dir="/var/log/sudo"` | Define o diretório para salvar logs de entrada e saída adicionais.
+`requiretty` | Requer TTY para usar sudo.
+`secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin **:/snap/bin**"` | Limita os caminhos que podem ser usados ​​pelo sudo para executar comandos. 
+`CTRL+X e YES` | Para sair e salvar
+`sudo mkdir -p /va/log/sudo` | criar diretorio
+`sudo touch /var/log/sudo/sudo.log` | criar arquivo de logs
 
 
 
