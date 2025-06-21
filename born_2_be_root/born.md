@@ -1,6 +1,12 @@
 # Born 2 be Root
 
-O projeto consiste em criar uma maquina virtual. (AJUSTAR RESUMO!!)
+O projeto consiste na criação de uma VM (Máquina Virtual), onde faremos ajustes em:
+
+- 
+- Sudo;
+- SSH;
+- Política de senhas;
+
 
 ## 1 - Hypervisor
 
@@ -24,44 +30,48 @@ Rocky e Debian
 
 No [site_oficial](www.debian.org/download) selecionar `amd64 debian-12.11.0...`, baixará arquivos.
 
-> Erro no download --> se nao tiver espaço no computador! Baixará apenas arquivos que nao fará a instalaçao. 
+> Erro no download --> se não possui espaço no computador! Baixará apenas arquivos que nao fará a instalação. 
 
-- Arquivo ISO (apos baixar o Debian) - Semelhante a um CD com o arquivo do sistema para instalar.
+- Arquivo ISO (após baixar o Debian) - é Semelhante a um CD com o arquivo do sistema para instalar.
 
 Após baixar o arquivo, incluir o arquivo na pasta `home\sgoinfre`, diretório com maior espaço para realizar esse projeto.
 
-Abrir um programa no computador chamado: `Oracle VM VirtualBox Manager` e clicar em `New`.
+Abrir programa: `Oracle VM VirtualBox Manager` e clicar em `New`.
 
-- Name: Nomeie sua VM;
-- Folder: Selecione o local de armazenamento: `pasta sgoinfre`;
-- ISO Image: Escolha o arquivo download ISO (que deve estar na sgoinfre).
-- Ticar `Skip Unattended Installation`, (pular instalacao nao assistida): 
+Etapa | O que fazer?
+---|---
+Name | Nomeie sua VM;
+Folder | Selecione o local de armazenamento: `pasta sgoinfre`
+ISO Image | Escolha o arquivo download ISO (que deve estar na sgoinfre).
+Ticar `Skip Unattended Installation` |  (pular instalaão não assistida),
 
-**Skip Unattended Installation**
+**Skip Unattended Instalation**
  
-Quando nao marcamos (ticamos) esse elemento, o VirtualBox tenta automatizar o processo de instalacao do sistema operacional, exemplos:
+Quando não marcamos (ticamos) esse elemento, o VirtualBox tenta automatizar o processo de instalação do sistema operacional, exemplos:
+
 * Cria um usuário automaticamente;
-* Define senha root por padrão
+* Define senha root por padrão;
 * Pula a tela de seleção de idioma, teclado, fuso horário...
 
-A ideia do projeto 'e para criarmos todos esses elementos.
+> A ideia do projeto é para criarmos todos esses elementos, um projeto do ZERO!
 
-FOTO!
+![alt text](image.png)
 
-Proxima etapa, alocar memoria:
+Proxima etapa, alocar memória:
 
-- Base Memory: 1024mb 
-- Processors: 1 
-- NAO ticar `Enable EFI`
-     - Extensible Firmware Interface (Ele pode causar problemas no boot ou dificultar instalações mais simples, como a do Debian.)
+Etapa | O que fazer?
+---|---
+Base Memory | 1024mb
+Processors | 1
+NAO ticar `Enable EFI` | Extensible Firmware Interface (Ele pode causar problemas no boot ou dificultar instalações mais simples, como a do Debian)
 
 **Base Memory**
 
-> RAM = Random Access Memory (memoria de curto prazo do computador)
+> RAM = Random Access Memory (memória de curto prazo do computador)
 
-- Memoria temporaria usada por programas abertos
-- Quanto mais RAM, mais programas podem rodar ao mesmo tempo.
-- A RAM 'e encerrada ao desligar o pc.
+- Memória temporária usada por programas abertos;
+- Quanto maior a RAM, mais programas podem rodar ao mesmo tempo;
+- A RAM é encerrada ao desligar o pc.
 
 **Processors**
 
@@ -71,56 +81,56 @@ Proxima etapa, alocar memoria:
 - O processador executa tarefas.
 - Núcleos = tarefas paralelas possíveis.
 
-!!!
+MELHORAR: APRENDER MAIS!!!!!!
 
-APRENDER MAIS!!!!!!
+![alt text](image-1.png)
 
-Proxima e ultima etapa, `Virtual Hard Disk`
+Próima e ultima etapa, `Virtual Hard Disk`
 
-- Criar com 8gb.
-- Deixe a opção **"Pre-allocate Full size" MARCADA**.
+Etapa | O que fazer?
+---|---
+Tamanho do Disco | 8gb
+Ticar `Pre-allocate Full size`| VirtualBox já separa 8 GB de espaço físico no computador, mesmo que o Debian só use 1 GB por enquanto. NÃO marcar, vai ocupar espaço aos poucos, conforme o Debian for precisando.
 
-!!!
+![alt text](image-2.png)
 
-- Marcar a opção, o VirtualBox já separa 8 GB de espaço físico no computador, mesmo que o Debian só use 1 GB por enquanto.
-- NÃO marcar, vai ocupar espaço aos poucos, conforme o Debian for precisando.
+### Operar Sistema de Instalação
 
-### Operar Sistema de Instalacao
+No programa: `Oracle VM VirtualBox Manager` e clicar em `Start`
 
-Etapa | O que fazer...
+Etapa | Descrição
 -|-
-`Start` | iniciar a maquina
-`Install` | iniciar a instalacao do Debian
+`Start` | vai ligar a máquina
+`Install` | iniciar a instalação do Debian
 `Select language` | English
-`Select your location` | others / Europe / Portugal
+`Select your location` | other / Europe / Portugal
 `Configure locales` | United States
-`Configure the keyboard` | American English
+`Configure the keyboard` | American English (em casa o teclado está Portuguese)
 Loading | ...
-`Configure the network --> Hostname` | hostname da maquina virtual: **username + 42**
+`Configure the network --> Hostname` | hostname da máquina virtual: **username + 42**
 `Configure the network --> Domain name` | pular etapa
-`Set up users and passwords --> new password` | Por enquanto, qualquer senha (grave-a!)
-Repita a senha | na proxima etapa
-`Set up users and passwords --> full name...` | O nome do usuario = Pamela Rondina
+`Set up users and passwords --> root password` | Por enquanto, qualquer senha (grave-a!). 
+Repita a senha na próxima etapa
+`Set up users and passwords --> full name...` | O nome do usuário = Pamela Rondina
 `Set up users and passwords --> username for your account` | username
-`Set up users and passwords --> choose a password for the new user` | Por enquanto, qualquer senha (grave-a!)
+`Set up users and passwords --> choose a password for the new user` | Por enquanto, qualquer senha (grave-a!). Repita a senha na próxima etapa
 `Configure the clock` | Lisbon
 Loading | ...
 
 Questions:
-
 1. O QUE 'E HOSTNAME??
 2. Por que pular Domain Name??
 
-### Particoes
+### Partições
 
-Etapa | O que fazer...
+Etapa | Descrição
 -|-
 `Partition disks` | Guided - use entire disk and set up encrypyted LVM
-`Partition disks --> Select disl to partition` | SCSI2 ... (a opcao que ja aparece)
-`Partition disks --> Partitioning scheme` | Separate / home partition
+`Partition disks --> Select disk to partition` | SCSI2 ... (a opçãp já aparece!)
+`Partition disks --> Partitioning scheme` | Separate / home partition / Yes
 Loading | ...
-`Partition disks --> Encryption passphrase` | senha importante, cada start da VM ela sera utilizada ex: @Ilovebolocenoura42
-`Partition disks --> amount of volume...` | max (atalho para especificar o tamanho m'aximo)
+`Partition disks --> Encryption passphrase` | senha importante, cada start da VM ela será utilizada ex: @Ilovebolo8 (grave-a!). Repita a senha na próxima etapa
+`Partition disks --> amount of volume...` | max (atalho para especificar o tamanho máximo)
 Loading | ...
 `Partition disks` | Finish partitioning...
 `Partition disks` | Write the changes to disk? YES
@@ -144,7 +154,7 @@ Questions:
 
 Apos as configuracoes da VM e Particoes, chegou o momento de acessar a maquina, assim que finalizamos o passo anterior abrir'a um terminal:
 
-Etapa | O que fazer...
+Etapa | Descrição
 -|-
 Solicitar a senha encriptada | @Ilovebolocenoura42
 hotname da maquina | prondina42
