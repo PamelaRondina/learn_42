@@ -100,7 +100,7 @@ No programa: `Oracle VM VirtualBox Manager` e clicar em `Start`
 
 Etapa | Descrição
 -|-
-`Start` | vai ligar a máquina
+`Start` | ligar a máquina
 `Install` | iniciar a instalação do Debian
 `Select language` | English
 `Select your location` | other / Europe / Portugal
@@ -135,60 +135,62 @@ Loading | ...
 `Partition disks` | Finish partitioning...
 `Partition disks` | Write the changes to disk? YES
 Loading | ...
-`Configure the package manager` | etapa de inserir midia, no momento cique em NO
-`Configure the package manager --> Debian archive...` | vai espelhar o arquivo Debian da regiao --> Portugal \ deb.debian.org
-`Configure the package manager --> HTTP...` | pule essa etapa (press Enter)
+`Configure the package manager` | NO (essa etapa está questionando se possuo mais arquivos ISO para serem instalados)
+`Configure the package manager --> Debian archive...` | vai espelhar o arquivo Debian da região --> Portugal \ deb.debian.org
+`Configure the package manager --> HTTP...` | pule essa etapa (press Enter, está questionando se utiliza proxy ou não - um bloqueador de acesso a sites na internet) NO (para a pesquisa!)
 Loading | ...
 `Software selection` | tire todos os tiques
 Loading | ...
-`Configuring grub-pc` | YES (carregador de Boot)
+`Configuring grub-pc` | YES (carregador de Boot, necessário para iniciar a VM)
 `Configuring grub-pc --> Device for boot...` | /dev/sda
 Loading | ...
 `Finish the installation` | Continue e VM criada! :)
 
 Questions:
-1. POr que estou separando as particoes??
-2. O que 'e carregador de Boot? Sistema operacional??
+1. Por que estou separando as partições?
+    Para que eu tenha espaços separados e que uma aplicação não interfira na outra.
 
 ### Acessar a VM
 
-Apos as configuracoes da VM e Particoes, chegou o momento de acessar a maquina, assim que finalizamos o passo anterior abrir'a um terminal:
+Após as configurações da VM e criação das Partições, chegou o momento de acessar a VM. Finalizamos o passo anterior, o terminal da VM estará aberto.
+
+@Ilovebolocenoura42
 
 Etapa | Descrição
 -|-
-Solicitar a senha encriptada | @Ilovebolocenoura42
-hotname da maquina | prondina42
-nome do usuario | Pamela Rondina
+Solicita a senha encriptada | @Ilovebolo8
+hotname da máquina | prondina42
+nome do usuário | Pamela Rondina
 login | username --> prondina 
 senha | criada anteriormente
 comando `lsblk` | Mostra no terminal 
 
+![alt text](image-3.png)
+
 ### Instalar Sudo
 
-> `sudo`: permite o usuário executar comandos com privilégios de root.
+> `sudo`: permite o usuário executar comandos com privilégios de root. Root é o dono da P* toda.
 
-Etapa | O que faz...
+Etapa | Descrição
 -|-
-`su -` | alterar para o root (incluir senha)
-`apt update` | atualiza a lista de pacotes disponiveis nos repositorios
+`su -` | alterar para o root (incluir senha dop usuário)
+`apt update` | atualiza a lista de pacotes disponíveis nos repositórios
 `apt install sudo` | instalar o pacote sudo, que permite executar comandos como root sem usar o `su -`
-`adduser prondina sudo` | passar o usuario para sudo
+`adduser prondina sudo` | passar o usuário para o grupo sudo
 `getent group sudo` | mostra quem está no grupo sudo 
-`reboot` | reinicia o sistema com seguranca 
-
-Em seguida, a VM vai reiniciar e solicitara as senhas para acesso. Acessar novamente e verificar a versao do sudo.
+`reboot` | reinicia o sistema com segurança 
+Reinicia a VM | Solicitará a senha encriptografada para acesso, e a login e senha usuário
+`sudo -V` | verificar a versão do Sudo (apenas para curiosidade!)
 
 > Agora liberado pois foi configurado o user para o grupo sudo.
 
 **Configurar SUDO**
 
-Etapa | O que faz...
+Etapa | Descrição
 -|-
-`sudo -V` | alterar para o root (incluir senha)
-**CONFIGURACOES SUDO** | ---------
-`sudo visudo` | abre as configuracoes do Sudo --> TODOS com `Defaults+(TAB)` (padrao)
-`env_reset` | ja consta
-`mail_badpass` | ja consta 
+`sudo visudo` | abre as configurações do Sudo --> TODOS com `Defaults+(TAB)` (padrão)
+`env_reset` | já consta
+`mail_badpass` | já consta 
 `passwd_tries=3` | 3 tentativas para conectar ao sudo
 `badpass_message="QUALQUER TEXTO."` | Exibe uma mensagem personalizada ao usar uma senha errada com o sudo.
 `logfile="/var/log/sudo/sudo.log"` | Define o arquivo de logs de entrada
@@ -196,40 +198,53 @@ Etapa | O que faz...
 `iolog_dir="/var/log/sudo"` | Define o diretório para salvar logs de entrada e saída adicionais.
 `requiretty` | Requer TTY para usar sudo.
 `secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin **:/snap/bin**"` | Limita os caminhos que podem ser usados ​​pelo sudo para executar comandos. 
-`CTRL+X e YES` | Para sair e salvar
-`sudo mkdir -p /va/log/sudo` | criar diretorio
+`CTRL+X YES ENTER` | Salvar e sair
+`sudo mkdir -p /var/log/sudo` | criar diretorio
 `sudo touch /var/log/sudo/sudo.log` | criar arquivo de logs
+
+Questions:
+1. O que é TTY para o sudo?
+
 
 ### Configurar SSH
 
-Etapa | O que faz...
+Etapa | Descrição
 -|-
 `sudo apt install openssh-server -y` | Pacote de servidor que permite acessar a VM remotamente via terminal
-`sudo nano /etc/ssh/sshd_config` | abre as configuracoes do ssh
+`sudo nano /etc/ssh/sshd_config` | abre as configurações do SSH
 `#Port 22` | Alterar para `Port 4242`
-`#PermitRootLogin prohibit-passwaord` | Alterar para `PermitRootLogin no` --> salvar e sair
+`#PermitRootLogin prohibit-passwaord` | Alterar para `PermitRootLogin no`
+`CTRL+X YES ENTER` | Salvar e sair
 `sudo service ssh status` | verifica o status do serviço SSH
-`sudo service ssh restart` | reiniciar o SSH devido a nova porta
+`sudo service ssh restart` | reinicia o SSH devido a nova porta 4242
 
+Status SSH --> antes de `sudo service ssh restart` :
 
+![alt text](image-4.png)
+
+Status SSH --> depois de `sudo service ssh restart` :
+
+![alt text](image-5.png)
 
 ### Configurar UFW
 
-Etapa | O que faz...
+Etapa | Descrição
 -|-
-`sudo apt install ufw -y` | Pacote de servidor que permite ferramenta simples de firewall, que controla o tráfego de entrada e saída da sua máquina Linux.
+`sudo apt install ufw -y` | Pacote de servidor que instala o UFW (Uncomplicated Firewall), uma ferramenta simples e intuitiva para gerenciamento de firewall no Linux. Ela permite controlar o tráfego de entrada e saída da máquina, ajudando a proteger o sistema contra acessos não autorizados.
 `sudo ufw enable` | ativar o firewall
 `sudo ufw allow 4242` | permitir acesso a porta 4242 do SSH
 `sudo ufw status` | visualizar o status das portas ALLOW (permitir)
+
+![alt text](image-6.png)
 
 ### Conectando...
 
 **VM via SSH Port 4242**
 
-Etapa | O que faz...
+Etapa | Descrição
 -|-
 `ssh prondina@127.0.0.1 -p 4242` | conectar
-solicitara senha | yes
+solicitará a senha -> yes
 `exit` | para sair
 
 **SSH de fora do terminal da VM Port 4242**
