@@ -173,12 +173,12 @@ comando `lsblk` | Mostra no terminal
 
 Etapa | Descrição
 -|-
-`su -` | alterar para o root (incluir senha dop usuário)
+`su -` | alterar para o root (incluir senha do usuário)
 `apt update` | atualiza a lista de pacotes disponíveis nos repositórios
 `apt install sudo` | instalar o pacote sudo, que permite executar comandos como root sem usar o `su -`
 `adduser prondina sudo` | passar o usuário para o grupo sudo
 `getent group sudo` | mostra quem está no grupo sudo 
-`reboot` | reinicia o sistema com segurança 
+`sudo reboot` | reinicia o sistema com segurança 
 Reinicia a VM | Solicitará a senha encriptografada para acesso, e a login e senha usuário
 `sudo -V` | verificar a versão do Sudo (apenas para curiosidade!)
 
@@ -205,7 +205,6 @@ Etapa | Descrição
 Questions:
 1. O que é TTY para o sudo?
 
-
 ### Configurar SSH
 
 Etapa | Descrição
@@ -217,6 +216,7 @@ Etapa | Descrição
 `CTRL+X YES ENTER` | Salvar e sair
 `sudo service ssh status` | verifica o status do serviço SSH
 `sudo service ssh restart` | reinicia o SSH devido a nova porta 4242
+`ssh -V` | verificar a versão do SSH (apenas para curiosidade!)
 
 Status SSH --> antes de `sudo service ssh restart` :
 
@@ -234,6 +234,7 @@ Etapa | Descrição
 `sudo ufw enable` | ativar o firewall
 `sudo ufw allow 4242` | permitir acesso a porta 4242 do SSH
 `sudo ufw status` | visualizar o status das portas ALLOW (permitir)
+`VERIFICAR !!! ` | verificar a versão do UFW (apenas para curiosidade!)
 
 ![alt text](image-6.png)
 
@@ -251,14 +252,54 @@ solicitará a senha -> yes
 
 No app `Oracle VM VirtualBox Manager`.
 
-Etapa | O que faz...
+Etapa | Descrição
 -|-
 `Settings` | ...
 `Network` | clicar em Advanced\port Forwarding
 `+` | Name: rule 1 \ Host Port: 4242 \ Guest Port: 4242
 OK e OK | 
 
+### Política de Senhas
 
+Etapa | Descrição
+-|-
+`sudo nano /etc/login.defs` | abrir configuração de senhas, ir em `Password aging controls`
+`PASS_MAX_DAYS 99999` | alterar para `PASS_MAX_DAYS 30`
+`PASS_MIN_DAYS 0` | alterar para `PASS_MIN_DAYS 2`
+`CTRL+X YES ENTER` | Salvar e sair
+
+![alt text](image-7.png)
+
+Etapa | Descrição
+-|-
+`sudo apt-get install libpam-pwquality -y` | Biblioteca que integra ao PAM (Pluggable Authentication Modules) e permite controlar a complexidade das senha
+`sudo nano /etc/pam.d/common-password` | acessar arquivo para configurar as senhas (pode pedir senha do usuário)
+`password requisite pam_pwquality.so retry=3` | adicionar cada um dos itens abaixo, separados por um espaço
+`minlen=10` | Senha deve ter no mínimo 10 caracteres
+`ucredit=-1` | 1 letra maiúscula
+`lcredit=-1` | 1 letra minúscula
+`dcredit=-1` |  1 número (dígito)
+`maxrepeat=3`| Não permite mais de 3 caracteres repetidos seguidos
+`reject_username`| Rejeita senhas iguais ao nome do usuário
+`difok=7`| Senha nova precisa ter pelo menos 7 caracteres diferentes da antiga
+`enforce_for_root`| Aplica as mesmas regras até para o usuário root
+`CTRL+X YES ENTER` | Salvar e sair
+`sudo reboot` | reinicia o sistema com segurança 
+
+![alt text](image-8.png)
+
+Etapa | Descrição
+-|-
+`passwd` | Alterar senha do usuário atual para a nova política
+Current Password | Senha atual
+New password | nova senha (de acorda a nova política)
+`sudo chage -l user` | Lista as informações da expiração da senha de um usuário.
+`sudo chage -M 30 -m 2 -W 7 user` | Define regras de validade e segurança para a senha do user.
+`-M 30` | Máximo de 30 dias de validade da senha. Depois disso, o usuário é obrigado a trocar.
+`-m 2` | Mínimo de 2 dias entre trocas. 
+`-W 7` |  aviso com 7 dias de antecedência antes da senha expirar.
+
+![alt text](image-9.png)
 
 
 ### 💻 Comandos básicos de gerenciamento Debian
@@ -273,7 +314,7 @@ OK e OK |
 `apt install sudo` | instala o pacote sudo 
 `adduser user sudo` | adiciona um usuário já criado ao grupo sudo 
 `getent group sudo` | mostra quem está no grupo sudo 
-`reboot` | reinicia o sistema com seguranca 
+`sudo reboot` | reinicia o sistema com seguranca 
 `sudo -V` | versao do sudo
 `sudo mkdir -p /va/log/sudo` | criar diretorio
 `sudo touch /var/log/sudo/sudo.log` | criar arquivo de logs
