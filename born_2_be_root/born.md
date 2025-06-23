@@ -365,6 +365,20 @@ Etapa: adicionar `user` a um `group`| Descrição
 -|-
 `sudo adduser nome_user nome_grupo` | `user` adicionado ao `group`
 
+### Criacao do Script
+
+Etapa: criar script | Descrição
+-|-
+`sudo touch /usr/local/bin/monitoring.sh` | criar arquivo para exeutar o script
+`sudo chmod 755 /usr/local/bin/monitoring.sh` | alterar permissoes de arquivo ** abaixo ** 
+`sudo nano /usr/local/bin/monitoring.sh` |  abrir arquivo para editar o script
+
+
+Número	| Quem |	Permissão
+|----|----|----|
+7	| 🧑 Dono	| Leitura (4) + Escrita (2) + Execução (1) = 7
+5	| 👨‍👩‍👧 Grupo	| Leitura (4) + Execução (1) = 5
+5	| 🌍 Outros	| Leitura (4) + Execução (1) = 5
 
 
 ------------------------------------
