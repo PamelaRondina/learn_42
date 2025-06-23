@@ -261,7 +261,7 @@ OK e OK |
 
 ### Política de Senhas
 
-Etapa | Descrição
+Etapa| Descrição
 -|-
 `sudo nano /etc/login.defs` | abrir configuração de senhas, ir em `Password aging controls`
 `PASS_MAX_DAYS 99999` | alterar para `PASS_MAX_DAYS 30`
@@ -270,7 +270,7 @@ Etapa | Descrição
 
 ![alt text](image-7.png)
 
-Etapa | Descrição
+Etapa: Instalar Bliblioca PAM  | Descrição
 -|-
 `sudo apt-get install libpam-pwquality -y` | Biblioteca que integra ao PAM (Pluggable Authentication Modules) e permite controlar a complexidade das senha
 `sudo nano /etc/pam.d/common-password` | acessar arquivo para configurar as senhas (pode pedir senha do usuário)
@@ -288,7 +288,7 @@ Etapa | Descrição
 
 ![alt text](image-8.png)
 
-Etapa | Descrição
+Etapa: Alterar senha do user | Descrição
 -|-
 `passwd` | Alterar senha do usuário atual para a nova política
 Current Password | Senha atual
@@ -300,6 +300,34 @@ New password | nova senha (de acorda a nova política)
 `-W 7` |  aviso com 7 dias de antecedência antes da senha expirar.
 
 ![alt text](image-9.png)
+
+### Esqueci a senha do USER! E agora?!
+
+Pois e, ao testar na escola e em minha casa: fiz a grandissima manobra de esquecer a senha do user!
+
+Bora ajustar!
+
+Etapa | Descrição
+-|-
+No Starta da VM | Na tela do GRUB digitar `e` (para editar a entrada do boot)
+Encontra a linha `linux /vmlinux-6.1...quiet` | Adicione no final `init=/bin/bash`
+`CTRL+X YES ENTER` | Salvar e sair
+O sistema reinicia a VM no modo root | Vai solicitar a senha encriptada
+`root@(none):/#` | adicionar `mount -o remount,rw /` (remonta o sistema com permissão de escrita)
+Em seguida, `root@(none):/#` | adicionar `passwd user`
+`New passaword` | adicionar nova senha conforme politicas de senhas e repita a etapa
+`reboot` | caso de erro, `exec /sbin/init`
+ 
+![alt text](image-10.png)
+
+FOTO CELULAR!!
+
+### Criad
+
+Etapa| Descrição
+-|-
+
+------------------------------------
 
 
 ### 💻 Comandos básicos de gerenciamento Debian
