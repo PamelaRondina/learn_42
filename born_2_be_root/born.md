@@ -322,10 +322,50 @@ Em seguida, `root@(none):/#` | adicionar `passwd user`
 
 FOTO CELULAR!!
 
-### Criad
+### Criar `User` e `Groups`
 
-Etapa| Descrição
+Etapa: criar `user`| Descrição
 -|-
+`sudo adduser user_name` | @umnovologin42
+
+![alt text](image-11.png)
+
+Etapa: Visualizar informacoes do `user`| Descrição
+-|-
+`getent passwd user` | comando que busca informações do usuário no banco de dados do tipo passwd
+Retorno `user:x:1001:1001:Pam:/home/user:/bin/bash` | No terminal teremos essa resposta.
+user	Nome do usuário
+`x` |	Senha criptografada (fica em /etc/shadow)
+`1001` | 	UID (ID do usuário)
+`1001` |	GID (ID do grupo primário)
+`Pamela Rondina` | geralmente nome completo (comentario, descricao)
+`/home/user` | Diretório, home do usuário
+`/bin/bash` | Shell padrão do usuário
+`cut -d: -f1 /etc/passwd` | lista os usuarios existentesget
+
+
+![alt text](image-12.png)
+
+Etapa: adicionar `group`| Descrição
+-|-
+`sudo addgroup nome_grupo` | cria um novo grupo
+
+![alt text](image-13.png)
+
+Etapa: visualizar `group` criados| Descrição
+-|-
+`getent group` | visualiza grupos existentes
+ `getent group nome_group` | verifica se um grupo especifico existe
+ `getent group | cut -d: -f1`
+ | mostra apenas os nomes dos usuarios: (`cut` --> corta o texto em colunas; `-d:` --> delimitador : ; `-f1` --> nome do grupo)
+ `getent group | wc -l` | conta quantos grupos existem
+ `group user` | visualizar os grupos de um user espscifico
+
+Etapa: adicionar `user` a um `group`| Descrição
+-|-
+`sudo adduser nome_user nome_grupo` | `user` adicionado ao `group`
+
+
 
 ------------------------------------
 
@@ -379,3 +419,4 @@ Nirmal Gope - Part 2 | [Youtube - Mandatory Part](https://www.youtube.com/watch?
 
 
 
+@Ilbc27
