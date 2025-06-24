@@ -473,20 +473,57 @@ Etapa: Memoria RAM | Descrição
 `free -m` | mostra o quanto de memoria em MB esta sendo utilizado (destaque para total($2) e used($3))
 `awk '{printf("%d/%dMB (%.2f%%)", $3, $2, $3/$2 * 100)}')` | Vai printar o tamanho em MB da memoria usada e total e apresentar em %
 
-```c
-#Memory Usage: 74/987MB (7.50%)
-74 == used ($3)
-987 == total ($2)
-7.50% == ($3 / $2 * 100)
+#### Memoria Disk
+
+**Antes de comecar: para conhecimento!**
+
+> Todas Particoes montadas no sistema `df -h`
+
+```bash
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        50G   20G   28G  42% /
+/dev/sda2        10G    5G    5G  50% /home
+tmpfs           2.0G     0  2.0G   0% /run
+...
 ```
 
+> Apenas a particao onde esta montado o diretorio raiz `/`
+
+```bash
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        50G   20G   28G  42% /
+```
+
+```bash
+disk_usage=$(df -BG / | awk 'NR==2 {printf("%d/%dGb (%.0f%%)", $3, $2, $3/$2 *100)}')
+
+echo "#Disk Usage: $disk_usage"
+```
+
+```c
+#Disk Usage: 1009/2Gb (49%)
+```
+> Verificar o Disco Rigido
+
+Etapa: Memoria DISK | Descrição
+-|-
+`df -BG /` | mostra o uso do disco `raiz /`, em GIGABYTES `-BG`, esta sendo utilizado 
+`NR==2` | 2 linha --> Ignora o cabeçalho e pega só os dados.
+`$3` e `$2` | destaque para total($2) e used($3)
+
+```c 
+#Disk Usage: 2/3Gb (49%)
+3 == used ($3)
+2 == total ($2)
+67% == ($3 / $2 * 100)
+```
+
+> !!! Dica: `df -h / | awk '{print NR, $0}'`, mostra quantas linhas 
 
 
 ------------------------------------
 
 ```c
-
-#Disk Usage: 1009/2Gb (49%)
 #CPU load: 6.7%
 #Last boot: 2021-04-25 14:45
 #LVM use: yes
