@@ -454,10 +454,38 @@ echo "#vCPU: $vcpu"
 Etapa: contar quando processadores virtuais a maquina possui| Descrição
 -|-
 `nproc` | comando de processadores virtuais
-________
+
+#### Memoria RAM utilizada.
+
+```bash
+memory_usage=$(free -m | grep Mem | awk '{printf("%d/%dMB (%.2f%%)", $3, $2, $3/$2 * 100)}')
+
+echo "#Memory Usage: $memory_usage"
+```
 
 ```c
 #Memory Usage: 74/987MB (7.50%)
+```
+> Verificar o quanto de memoria RAM esta sendo utilizado no momento em MB e %
+
+Etapa: Memoria RAM | Descrição
+-|-
+`free -m` | mostra o quanto de memoria em MB esta sendo utilizado (destaque para total($2) e used($3))
+`awk '{printf("%d/%dMB (%.2f%%)", $3, $2, $3/$2 * 100)}')` | Vai printar o tamanho em MB da memoria usada e total e apresentar em %
+
+```c
+#Memory Usage: 74/987MB (7.50%)
+74 == used ($3)
+987 == total ($2)
+7.50% == ($3 / $2 * 100)
+```
+
+
+
+------------------------------------
+
+```c
+
 #Disk Usage: 1009/2Gb (49%)
 #CPU load: 6.7%
 #Last boot: 2021-04-25 14:45
