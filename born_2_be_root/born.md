@@ -367,18 +367,59 @@ Etapa: adicionar `user` a um `group`| Descrição
 
 ### Criacao do Script
 
+**Modelo**
+
+```c
+#Architecture: Linux wil 4.19.0-16-amd64 #1 SMP Debian 4.19.181-1 (2021-03-19) x86_64 GNU/Linux
+#CPU physical : 1
+#vCPU : 1
+#Memory Usage: 74/987MB (7.50%)
+#Disk Usage: 1009/2Gb (49%)
+#CPU load: 6.7%
+#Last boot: 2021-04-25 14:45
+#LVM use: yes
+#Connections TCP : 1 ESTABLISHED
+#User log: 1
+#Network: IP 10.0.2.15 (08:00:27:51:9b:a5)
+#Sudo : 42 cmd
+```
 Etapa: criar script | Descrição
 -|-
 `sudo touch /usr/local/bin/monitoring.sh` | criar arquivo para exeutar o script
 `sudo chmod 755 /usr/local/bin/monitoring.sh` | alterar permissoes de arquivo ** abaixo ** 
 `sudo nano /usr/local/bin/monitoring.sh` |  abrir arquivo para editar o script
 
-
 Número	| Quem |	Permissão
 |----|----|----|
 7	| 🧑 Dono	| Leitura (4) + Escrita (2) + Execução (1) = 7
 5	| 👨‍👩‍👧 Grupo	| Leitura (4) + Execução (1) = 5
 5	| 🌍 Outros	| Leitura (4) + Execução (1) = 5
+
+#### 1) A arquitetura do seu sistema operacional e sua versão do kernel.
+
+```bash
+#!/bin/bash
+
+#Arquitetura
+arch=$(uname -a)
+
+echo "#Architecture: $arch
+```
+- Criado uma variavel `arch=$(uname -a)`: busca todas as informacoes necessarias
+- `echo "#Architecture: $arch`: far'a com que imprima o script
+
+**#Architecture: Linux prondina42 5.10.0-21-amd64 #1 SMP Debian 4.19.181-1 (2021-03-19) x86_64 GNU/Linux**
+
+Etapa: O que o comando `uname -a` informa | Descrição
+-|-
+`Linux` | nome do sistema
+`prondina42` | nome da máquina
+`5.10.0-21-amd64` | versão do kernel (O QUE "E O KERNEL)
+`x86_64` | arquitetura (64 bits)
+`#1 SMP Debian 4.19.181-1 (2021-03-19) x86_64` | QUE ISSO??
+`GNU/Linux` | sistema
+
+#### O número de processadores físicos.
 
 
 ------------------------------------
