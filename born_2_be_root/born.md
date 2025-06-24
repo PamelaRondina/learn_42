@@ -439,10 +439,24 @@ Etapa: contar quando processadores f'isicos a maquina possui| Descrição
 `grep Socket` | filtra a linha onde aparece o texto `Socket`
 `awk '{print $2}'` | quebra a linha em TABS e mostra a segunda opcao
 
-#### 
+#### O número de processadores virtuais.
+
+```bash
+vcpu=$(nproc)
+
+echo "#vCPU: $vcpu"
+```
 
 ```c
-#vCPU : 1
+#vCPU: 1
+```
+
+Etapa: contar quando processadores virtuais a maquina possui| Descrição
+-|-
+`nproc` | comando de processadores virtuais
+________
+
+```c
 #Memory Usage: 74/987MB (7.50%)
 #Disk Usage: 1009/2Gb (49%)
 #CPU load: 6.7%
