@@ -496,7 +496,7 @@ echo "#Disk Usage: $disk_usage"
 ```
 
 ```c
-#Disk Usage: 1009/2Gb (49%)
+#Disk Usage: 1009/2Gb (49%)á tranquilo, vou te ajudar a montar o script com as explicações para você sacar tudo de verdade e se 
 ```
 > Verificar o Disco Rigido
 
@@ -661,6 +661,25 @@ ip link
 `ip link` | Mostra as interfaces de rede do sistema
 `grep ether` | contém o endereço MAC da interface 
 `awk '{print $2}` | Imprime a segunda coluna
+
+#### Sudo : 42 cmd
+
+> 
+```bash
+sudo=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
+echo "#Sudo: $sudo"
+```
+
+```c
+#Sudo : 42 cmd
+```
+
+Etapa:  | Descrição
+|---|---|
+`journalctl _COMM=sudo` | Puxa do systemd journal todas as entradas onde o programa executado foi “sudo”
+`grep COMMAND` | Filtra só as linhas que têm a palavra “COMMAND
+`wc -l` | Conta quantas linhas sobraram depois do filtro, ou seja, quantos comandos foram realmente executados via sudo.
+
 
 
 ------------------------------------
