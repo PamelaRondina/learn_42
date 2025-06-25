@@ -473,7 +473,7 @@ Etapa: Memoria RAM | Descrição
 `free -m` | mostra o quanto de memoria em MB esta sendo utilizado (destaque para total($2) e used($3))
 `awk '{printf("%d/%dMB (%.2f%%)", $3, $2, $3/$2 * 100)}')` | Vai printar o tamanho em MB da memoria usada e total e apresentar em %
 
-#### Memoria Disk
+#### #Disk Usage: 1009/2Gb (49%) --> Memoria Disk 
 
 **Antes de comecar: para conhecimento!**
 
@@ -520,11 +520,50 @@ Etapa: Memoria DISK | Descrição
 
 > !!! Dica: `df -h / | awk '{print NR, $0}'`, mostra quantas linhas 
 
+#### CPU load: 6.7% --> 
+
+**Antes de comecar: para conhecimento!**
+
+
+```bash
+cpu_load=$(top -bn1 | grep "Cpu(s)" | awk '{printf("%1.f%%", 100 - $8)}')
+
+echo "#CPU load: $cpu_load"
+```
+
+```c
+#CPU load: 6.7%
+```
+> Porcentagem de uso da CPU em um dado momento.
+
+Etapa: % CPU Load | Descrição
+-|-
+`top` | mostra em tempo real o que ocorre na maquina: uso de CPU, uso de memoria, quais processos estao rodando (atualiza de segundo em segundo) (Utilizar apenas o top nao deixa utilizar o grep, pois nao tem uma "foto - algo estatico")
+`-b` | batch mode: modo robo, nao interativo. Escreve a saida no terminal com um texto simples
+`n1` | execute apenas 1 atualizacao (1 leitura do sistema)
+`grep "Cpu(s)"` | trabalha na linha tal
+ `awk '{printf("%1.f%%", 100 - $8)}'` | 100 - a posicao de valor do ID (valor que nao esta sendo usado)  
+
+Exemplo de `top -bn1 | grep "Cpu(s)"`
+```c 
+%Cpu(s):  6.7 us,  2.0 sy,  0.0 ni, 100  id,  0.1 wa,  0.0 hi,  0.2 si,  0.0 st
+```
+
+Etapa: Exemplo| Descrição
+-|-
+`us` | uso da CPU em tarefas de usuário (ex: programas) 
+`sy` | uso da CPU em tarefas do sistema (ex: kernel)
+`id` | quanto está ociosa (quanto NÃO está sendo usada)
+
+Somar `us + sy` pra saber o uso total ou calcular `100 - id` (escolhi a segunda opcao).
+
+
+#### 00000000000000000000
 
 ------------------------------------
 
 ```c
-#CPU load: 6.7%
+
 #Last boot: 2021-04-25 14:45
 #LVM use: yes
 #Connections TCP : 1 ESTABLISHED
