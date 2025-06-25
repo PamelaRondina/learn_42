@@ -601,7 +601,7 @@ Etapa:  | Descrição
 connect_tcp=$(ss -ta | grep ESTAB | wc -l
 )
 
-echo "#LVM use: $connect_tcp"
+echo "#Connections TCP: $connect_tcp ESTABLHISED"
 ```
 
 ```c
@@ -615,12 +615,32 @@ Etapa:  | Descrição
 `-a` | Mostra todas as conexões (ativas e em escuta) 
 `grep ESTAB` | Filtra só as que estão estabelecidas
 `wc -l` | Conta quantas conexões tem (quantas linhas aparecem) 
+
+#### #User log: 1
+
+> Quantos usuários estão atualmente conectados/logados no sistema.
+
+```bash
+user_log=$(who | wc -l)
+
+echo "#User log: $user_log"
+```
+
+```c
+#User log: 1
+```
+
+Etapa:  | Descrição
+-|-
+`who` | Mlista os usuários logados no momento (nome, terminal, horário etc.)
+`wc -l` | conta quantas linhas existem (cada linha = 1 usuário conectado)
+
+
 ------------------------------------
 
 
 
 ```c
-#User log: 1
 #Network: IP 10.0.2.15 (08:00:27:51:9b:a5)
 #Sudo : 42 cmd
 ```
