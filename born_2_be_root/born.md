@@ -626,6 +626,31 @@ Etapa:  | Descrição
 ```
 ------------------------------------
 
+### Acessar VM _AJUSTAR ETAPA!***********
+
+> Tipo de conexão de rede da VM
+
+Se estiver usando NAT, talvez não consiga acessar a VM diretamente. Recomendo mudar para Bridged Adapter ou Host-only Adapter:
+
+1. Desligar a VM.
+2. No `Oracle VM VirtualBox Manager`> Settings > Network.
+3. Alterar de `NAT` para `Bridged Adapter`.
+4. Reinicia a VM.
+
+-----------------------
+***AJUSTAR ETAPA!!!
+
+sudo service ssh status - verificar status do ssh (active de preferencia)
+sudo service ssh start | caso nao esteja ativo
+sudo nano /etc/ssh/sshd_config | arquivo de config de porta
+Port 4242 | ativa
+getent passwd pamela | confirmar user
+sudo adduser pamela | criar user
+sudo usermod -aG sudo pamela | NAO SEI
+
+sudo systemctl enable ssh
+
+
 
 ### 💻 Comandos básicos de gerenciamento Debian
 
