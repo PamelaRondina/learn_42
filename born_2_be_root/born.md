@@ -522,8 +522,7 @@ Etapa: Memoria DISK | Descrição
 
 #### CPU load: 6.7% --> 
 
-**Antes de comecar: para conhecimento!**
-
+> Porcentagem de uso da CPU em um dado momento.
 
 ```bash
 cpu_load=$(top -bn1 | grep "Cpu(s)" | awk '{printf("%1.f%%", 100 - $8)}')
@@ -534,7 +533,6 @@ echo "#CPU load: $cpu_load"
 ```c
 #CPU load: 6.7%
 ```
-> Porcentagem de uso da CPU em um dado momento.
 
 Etapa: % CPU Load | Descrição
 -|-
@@ -557,16 +555,30 @@ Etapa: Exemplo| Descrição
 
 Somar `us + sy` pra saber o uso total ou calcular `100 - id` (escolhi a segunda opcao).
 
-
 #### Last boot: 2021-04-25 14:45
 
 > Quando o sistema foi iniciado pela ultima vez?
+> Boot é o processo de ligar e iniciar um sistema operacional em um computador.
+
+```bash
+last_boot=$(who -b | awk '{print($3,$4)}')
+
+echo "#Last boot: $last_boot"
+```
+
+```c
+#Last boot: 2021-04-25 14:45
+#Last boot: AAAA-MM-DD HH:MM
+```
+
+Etapa:  | Descrição
+-|-
+`who -b` | mostra quem foi o ultimo boot
+`awk '{print($3,$4)}'` | imprime os dados necessarios (, 'e o espaco)
 
 ------------------------------------
 
 ```c
-
-#Last boot: 2021-04-25 14:45
 #LVM use: yes
 #Connections TCP : 1 ESTABLISHED
 #User log: 1
