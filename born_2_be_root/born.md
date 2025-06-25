@@ -100,12 +100,7 @@ No programa: `Oracle VM VirtualBox Manager` e clicar em `Start`
 
 Etapa | Descrição
 -|-
-`Start` | ligar a máquina
-`Install` | iniciar a instalação do Debian
-`Select language` | English
-`Select your location` | other / Europe / Portugal
-`Configure locales` | United States
-`Configure the keyboard` | American English (em casa o teclado está Portuguese)
+`Start` | ligar a máquinilibx, raycasting | American English (em casa o teclado está Portuguese)
 Loading | ...
 `Configure the network --> Hostname` | hostname da máquina virtual: **username + 42**
 `Configure the network --> Domain name` | pular etapa
@@ -576,10 +571,35 @@ Etapa:  | Descrição
 `who -b` | mostra quem foi o ultimo boot
 `awk '{print($3,$4)}'` | imprime os dados necessarios (, 'e o espaco)
 
-------------------------------------
+#### LVM use: yes
+
+> LVM: Logical Volume Manager: gerente de espaço de armazenamento no Linux!
+
+```bash
+lvm_use=$(lsblk | grep -q "lvm" && echo "yes" || echo "no" )
+
+echo "#LVM use: $lvm_use"
+```
 
 ```c
 #LVM use: yes
+```
+
+Etapa:  | Descrição
+-|-
+`lsblk` | listar os dispositivos de blocos
+`grep -q "lvm"` | localize em quiet (silencio), se achar retorna (0), caso nao (1)
+`&& echo "yes"` | se achou, imprime yes
+`(pipe2x) echo "no"` | e se nao, imprime no 
+
+
+------------------------------------
+
+
+
+
+```c
+
 #Connections TCP : 1 ESTABLISHED
 #User log: 1
 #Network: IP 10.0.2.15 (08:00:27:51:9b:a5)
