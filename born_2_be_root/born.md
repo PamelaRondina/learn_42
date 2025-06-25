@@ -542,7 +542,7 @@ Etapa: % CPU Load | Descrição
 `-b` | batch mode: modo robo, nao interativo. Escreve a saida no terminal com um texto simples
 `n1` | execute apenas 1 atualizacao (1 leitura do sistema)
 `grep "Cpu(s)"` | trabalha na linha tal
- `awk '{printf("%1.f%%", 100 - $8)}'` | 100 - a posicao de valor do ID (valor que nao esta sendo usado)  
+ `awk '{printf("%1.f%%", 100 - $8)}'` | 100 - a posicao de valor do ID --> 8 coluna (valor que nao esta sendo usado)  
 
 Exemplo de `top -bn1 | grep "Cpu(s)"`
 ```c 
@@ -558,7 +558,9 @@ Etapa: Exemplo| Descrição
 Somar `us + sy` pra saber o uso total ou calcular `100 - id` (escolhi a segunda opcao).
 
 
-#### 00000000000000000000
+#### Last boot: 2021-04-25 14:45
+
+> Quando o sistema foi iniciado pela ultima vez?
 
 ------------------------------------
 
