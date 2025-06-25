@@ -616,7 +616,7 @@ Etapa:  | Descrição
 `grep ESTAB` | Filtra só as que estão estabelecidas
 `wc -l` | Conta quantas conexões tem (quantas linhas aparecem) 
 
-#### #User log: 1
+#### User log: 1
 
 > Quantos usuários estão atualmente conectados/logados no sistema.
 
@@ -635,15 +635,34 @@ Etapa:  | Descrição
 `who` | Mlista os usuários logados no momento (nome, terminal, horário etc.)
 `wc -l` | conta quantas linhas existem (cada linha = 1 usuário conectado)
 
+#### Network: IP 10.0.2.15 (08:00:27:51:9b:a5)
 
-------------------------------------
+> Descobrir o IP da Maquina e o endereco MAC
 
+- O endereço IP: interface de rede (da VM)
+- O endereço MAC: dessa mesma interface 
 
+```bash
+ip_address=$(hostname -I | awk '{print $1}')
+ip_mac=$(ip link | grep ether | awk '{print $2}')
+
+echo "#Networking: $ip_address ($ip_mac)"
+```
 
 ```c
 #Network: IP 10.0.2.15 (08:00:27:51:9b:a5)
-#Sudo : 42 cmd
 ```
+
+Etapa:  | Descrição
+|---|---|
+`hostname -I` | Mostra os endereços IP atribuídos às interfaces de rede 
+`awk '{print $1}'` | Imprime a primeira coluna
+ip link
+`ip link` | Mostra as interfaces de rede do sistema
+`grep ether` | contém o endereço MAC da interface 
+`awk '{print $2}` | Imprime a segunda coluna
+
+
 ------------------------------------
 
 ### Acessar VM _AJUSTAR ETAPA!***********
