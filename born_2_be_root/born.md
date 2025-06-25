@@ -593,14 +593,33 @@ Etapa:  | Descrição
 `(pipe2x) echo "no"` | e se nao, imprime no 
 
 
+#### Connections TCP : 1 ESTABLISHED
+
+> Mostrar o número de conexões TCP que estão no estado ESTABLISHED.
+
+```bash
+connect_tcp=$(ss -ta | grep ESTAB | wc -l
+)
+
+echo "#LVM use: $connect_tcp"
+```
+
+```c
+#Connections TCP : 1 ESTABLISHED
+```
+
+Etapa:  | Descrição
+-|-
+`ss` | Mostra sockets, ou seja, conexões de rede
+`-t` | Filtra só conexões TCP (o "T" do TCP) 
+`-a` | Mostra todas as conexões (ativas e em escuta) 
+`grep ESTAB` | Filtra só as que estão estabelecidas
+`wc -l` | Conta quantas conexões tem (quantas linhas aparecem) 
 ------------------------------------
 
 
 
-
 ```c
-
-#Connections TCP : 1 ESTABLISHED
 #User log: 1
 #Network: IP 10.0.2.15 (08:00:27:51:9b:a5)
 #Sudo : 42 cmd
