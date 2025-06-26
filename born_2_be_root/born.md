@@ -206,12 +206,8 @@ Questions:
 
 #### Rodar Script sem Senha
 
-Etapa: | Descrição
-|---|---|
-No terminal, `sudo visudo` | abre as configurações do Sudo
-Em `Allow members...` | Incluir `user ALL=(ALL) NOPASSWD: /usr/local/bin/monitoring.sh`
+INLCUIR LINK DO LOCAL!!
 
-![alt text](image-14.png)
 
 
 ### Configurar SSH
@@ -702,11 +698,16 @@ Em `Allow members...` | Incluir `user ALL=(ALL) NOPASSWD: /usr/local/bin/monitor
 
 ![alt text](image-14.png)
 
-
-
-
 ------------------------------------
 
+### Crontab
+
+Etapa: | Descrição
+|---|---|
+No terminal, `sudo systemctl enable cron.service` | ativa o serviço con.service para iniciar automaticamente toda vez que o sistema for bootado (ligado/reiniciado).
+`sudo reboot` | reiniciar a maquina
+
+--------------------------------------
 ### Acessar VM _AJUSTAR ETAPA!***********
 
 > Tipo de conexão de rede da VM
