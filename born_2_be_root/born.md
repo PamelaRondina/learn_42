@@ -826,8 +826,14 @@ Etapa: | Descrição
 |---|---|
 Desligue a VM | no aplicativo da Oracle VM
 NO terminao host (e nao na VM!) | Acesse a sua VM `cd /home/user/sgoinfre/born2berrot`
-busque o arquivo .vdi `shasum born2beroot.vdi` | gerara a assintura
-Copie o texto | Crie um arquivo .txt
+busque o arquivo .vdi `shasum NomeDaMaquina.vdi` | gerara a assintura
+Copie o texto | Crie um arquivo `signature.txt`
+
+![alt text](image-17.png)
+
+> Esse arquivo em signature.txt que deve ser enviado no github da escola!
+
+
 
 
 
