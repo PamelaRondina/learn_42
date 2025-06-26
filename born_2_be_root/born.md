@@ -7,6 +7,7 @@ O projeto consiste na criação de uma VM (Máquina Virtual), onde faremos ajust
 - UFW;
 - Política de senhas;
 
+# Criar a VM
 
 ## 1 - Hypervisor
 
@@ -19,8 +20,6 @@ Tipo | Nome | Utilizado em | Exemplos
  2 | Hosted | Roda dentro do sistema operacional (Windowns, Linux), um programa dentro do sistema | VirtualBox, VMware
 
 ## 2 - Distribuiçao Linux
-
-!!!!!!!!
 
 VERIFICAR DIFERENCA ENTRE AMBOS
 Rocky e Debian
@@ -43,7 +42,7 @@ Etapa | O que fazer?
 Name | Nomeie sua VM;
 Folder | Selecione o local de armazenamento: `pasta sgoinfre`
 ISO Image | Escolha o arquivo download ISO (que deve estar na sgoinfre).
-Ticar `Skip Unattended Installation` |  (pular instalaão não assistida),
+Ticar `Skip Unattended Installation` |  (pular instalacão não assistida),
 
 **Skip Unattended Instalation**
  
@@ -85,7 +84,7 @@ MELHORAR: APRENDER MAIS!!!!!!
 
 ![alt text](image-1.png)
 
-Próima e ultima etapa, `Virtual Hard Disk`
+Próxima e ultima etapa, `Virtual Hard Disk`
 
 Etapa | O que fazer?
 ---|---
@@ -100,31 +99,35 @@ No programa: `Oracle VM VirtualBox Manager` e clicar em `Start`
 
 Etapa | Descrição
 -|-
-`Start` | ligar a máquinilibx, raycasting | American English (em casa o teclado está Portuguese)
+`Start` | ligar a máquina
+`Install` | iniciar a m'aquina
+`English` | selecionar o idioma
+`Select your location` | Other / Europe / Portugal
+`Configure locales` | United Kingdom
+`Configure the keybord` | American English (em casa o teclado está Portuguese)
 Loading | ...
-`Configure the network --> Hostname` | hostname da máquina virtual: **username + 42**
+`Configure the network --> Hostname` | hostname da máquina virtual: **prondina42**
 `Configure the network --> Domain name` | pular etapa
 `Set up users and passwords --> root password` | Por enquanto, qualquer senha (grave-a!). 
 Repita a senha na próxima etapa
 `Set up users and passwords --> full name...` | O nome do usuário = Pamela Rondina
-`Set up users and passwords --> username for your account` | username
+`Set up users and passwords --> username for your account` | prondina
 `Set up users and passwords --> choose a password for the new user` | Por enquanto, qualquer senha (grave-a!). Repita a senha na próxima etapa
 `Configure the clock` | Lisbon
 Loading | ...
 
 Questions:
 1. O QUE 'E HOSTNAME??
-2. Por que pular Domain Name??
 
 ### Partições
 
 Etapa | Descrição
 -|-
 `Partition disks` | Guided - use entire disk and set up encrypyted LVM
-`Partition disks --> Select disk to partition` | SCSI2 ... (a opçãp já aparece!)
+`Partition disks --> Select disk to partition` | SCSI1 ... (a opçãp já aparece!)
 `Partition disks --> Partitioning scheme` | Separate / home partition / Yes
 Loading | ...
-`Partition disks --> Encryption passphrase` | senha importante, cada start da VM ela será utilizada ex: @Ilovebolo8 (grave-a!). Repita a senha na próxima etapa
+`Partition disks --> Encryption passphrase` | senha importante, cada start da VM ela será utilizada ex: @Ilbc42 (grave-a!). Repita a senha na próxima etapa
 `Partition disks --> amount of volume...` | max (atalho para especificar o tamanho máximo)
 Loading | ...
 `Partition disks` | Finish partitioning...
@@ -132,9 +135,11 @@ Loading | ...
 Loading | ...
 `Configure the package manager` | NO (essa etapa está questionando se possuo mais arquivos ISO para serem instalados)
 `Configure the package manager --> Debian archive...` | vai espelhar o arquivo Debian da região --> Portugal \ deb.debian.org
-`Configure the package manager --> HTTP...` | pule essa etapa (press Enter, está questionando se utiliza proxy ou não - um bloqueador de acesso a sites na internet) NO (para a pesquisa!)
+`Configure the package manager --> HTTP...` | pule essa etapa (press Enter, está questionando se utiliza proxy ou não - um bloqueador de acesso a sites na internet) N
 Loading | ...
-`Software selection` | tire todos os tiques
+`Configuring popular-contest` | uma pesquisa 'NO'
+Loading | ...
+`Software selection` | elimine todos os tiques + ENTER
 Loading | ...
 `Configuring grub-pc` | YES (carregador de Boot, necessário para iniciar a VM)
 `Configuring grub-pc --> Device for boot...` | /dev/sda
@@ -148,20 +153,20 @@ Questions:
 
 ### 02. Antes de Acessar a VM --> Liberar acesso a outro terminal
 
-> Tipo de conexão de rede da VM
+Apos a VM criada, abrira o terminal da VM (que 'e pessimo para editar, apanhei bastante nele!)
 
 Se estiver usando NAT, talvez não consiga acessar a VM diretamente. Recomendo mudar para Bridged Adapter ou Host-only Adapter:
 
-1. Desligar a VM.
+1. Desligar a VM: File / Close
 2. No `Oracle VM VirtualBox Manager`> Settings > Network.
 3. Alterar de `NAT` para `Bridged Adapter`.
 4. Reinicia a VM.
 
+Antes, precisaremos instalar o SSH para demois acessar por outro terminal.
+
 ### 03 Acessar a VM
 
-Após as configurações da VM e criação das Partições, chegou o momento de acessar a VM. Finalizamos o passo anterior, o terminal da VM estará aberto.
-
-@Ilovebolocenoura42
+Após as configurações da VM e criação das Partições, chegou o momento de acessar a VM. 
 
 Etapa | Descrição
 -|-
@@ -174,13 +179,57 @@ comando `lsblk` | Mostra no terminal
 
 ![alt text](image-3.png)
 
+
+
+PRIMEIRO CRIAR A PORTA PARA ACESSO
+
+SSH
+UFW
+SUDO
+
+### 01 Configurar SSH
+
+> Aqui estaremos com usuario root --> Dono de Tudo, nao teremos necessidade de rodar os comandos com sudo!
+
+Etapa | Descrição
+-|-
+`su -` | alterar para o root (incluir senha do hostname --> prondina42)
+`apt update` | atualiza a lista de pacotes disponíveis nos repositórios
+`apt install openssh-server -y` | Pacote de servidor que permite acessar a VM remotamente via terminal
+`nano /etc/ssh/sshd_config` | abre as configurações do SSH
+`#Port 22` | Alterar para `Port 4242` (eliminar o # para iniciar a ativacao da porta 4242)
+`CTRL+X YES ENTER` | Salvar e sair
+`service ssh status` | verifica o status do serviço SSH
+`sudo service ssh restart` | reinicia o SSH devido a nova porta 4242
+`ssh -V` | verificar a versão do SSH (apenas para curiosidade!)
+
+
+
+
+Status SSH --> antes de `sudo service ssh restart` :
+
+![alt text](image-4.png)
+
+Status SSH --> depois de `sudo service ssh restart` :
+
+![alt text](image-5.png)
+
+
+
+
+
+
+
+
+
+
 ### 06 Instalar Sudo
 
 > `sudo`: permite o usuário executar comandos com privilégios de root. Root é o dono da P* toda.
 
 Etapa | Descrição
 -|-
-`su -` | alterar para o root (incluir senha do usuário)
+`su -` | alterar para o root (incluir senha do hostname --> prondina42)
 `apt update` | atualiza a lista de pacotes disponíveis nos repositórios
 `apt install sudo` | instalar o pacote sudo, que permite executar comandos como root sem usar o `su -`
 `adduser prondina sudo` | passar o usuário para o grupo sudo
@@ -212,6 +261,12 @@ Etapa | Descrição
 Questions:
 1. O que é TTY para o sudo?
 
+## DEPOIS DO SUDO CRIADO! Retornar em SSH 
+Etapa | Descrição
+-|-
+`#PermitRootLogin prohibit-password` | Alterar para `PermitRootLogin no`
+`CTRL+X YES ENTER` | Salvar e sair
+
 #### Rodar Script sem Senha
 
 INLCUIR LINK DO LOCAL!!
@@ -225,6 +280,7 @@ INCLUIR LINK
 
 Etapa | Descrição
 -|-
+`su -` | alterar para o root (incluir senha do hostname --> prondina42)
 `sudo apt install openssh-server -y` | Pacote de servidor que permite acessar a VM remotamente via terminal
 `sudo nano /etc/ssh/sshd_config` | abre as configurações do SSH
 `#Port 22` | Alterar para `Port 4242`
