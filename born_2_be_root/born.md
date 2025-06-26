@@ -471,7 +471,7 @@ FYI `-e` | "editar" o arquivo crontab desse usuário
 
 Etapa: | Descrição
 |---|---|
-`@reboot sleep 40 /usr/local/bin/monitoring.sh` | Quando o sistema for iniciado (rebootado), espere 40 segundos e então execute o script monitoring.sh.
+`@reboot sleep 40 && /usr/local/bin/monitoring.sh` | Quando o sistema for iniciado (rebootado), espere 40 segundos e então execute o script monitoring.sh.
 No arquivo, `*/10 * * * * bash /usr/local/bin/monitoring.sh`
 FYI */10	| minuto: execute a cada 10 minutos
 FYI * |	hora: em todas as horas
@@ -481,12 +481,7 @@ FYI * | dia da semana: em todos os dias da semana
 
 ![alt text](image-16.png)
 
-
-
-
-
-> `sudo /usr/local/bin/monitoring.sg` --> rodar o script
-
+## Criar --> aquivo de Script
 
 Etapa: criar script | Descrição
 -|-
@@ -668,7 +663,7 @@ Etapa: Exemplo| Descrição
 
 Somar `us + sy` pra saber o uso total ou calcular `100 - id` (escolhi a segunda opcao).
 
-#### Last boot: 2021-04-25 14:45
+### Last boot: 2021-04-25 14:45
 
 > Quando o sistema foi iniciado pela ultima vez?
 > Boot é o processo de ligar e iniciar um sistema operacional em um computador.
@@ -689,7 +684,7 @@ Etapa:  | Descrição
 `who -b` | mostra quem foi o ultimo boot
 `awk '{print($3,$4)}'` | imprime os dados necessarios (, 'e o espaco)
 
-#### LVM use: yes
+### LVM use: yes
 
 > LVM: Logical Volume Manager: gerente de espaço de armazenamento no Linux!
 
@@ -711,7 +706,7 @@ Etapa:  | Descrição
 `(pipe2x) echo "no"` | e se nao, imprime no 
 
 
-#### Connections TCP : 1 ESTABLISHED
+### Connections TCP : 1 ESTABLISHED
 
 > Mostrar o número de conexões TCP que estão no estado ESTABLISHED.
 
@@ -734,7 +729,7 @@ Etapa:  | Descrição
 `grep ESTAB` | Filtra só as que estão estabelecidas
 `wc -l` | Conta quantas conexões tem (quantas linhas aparecem) 
 
-#### User log: 1
+### User log: 1
 
 > Quantos usuários estão atualmente conectados/logados no sistema.
 
@@ -753,7 +748,7 @@ Etapa:  | Descrição
 `who` | Mlista os usuários logados no momento (nome, terminal, horário etc.)
 `wc -l` | conta quantas linhas existem (cada linha = 1 usuário conectado)
 
-#### Network: IP 10.0.2.15 (08:00:27:51:9b:a5)
+### Network: IP 10.0.2.15 (08:00:27:51:9b:a5)
 
 > Descobrir o IP da Maquina e o endereco MAC
 
@@ -779,7 +774,7 @@ Etapa:  | Descrição
 `grep ether` | contém o endereço MAC da interface 
 `awk '{print $2}` | Imprime a segunda coluna
 
-#### Sudo : 42 cmd
+### Sudo : 42 cmd
 
 > 
 ```bash
@@ -799,7 +794,7 @@ Etapa:  | Descrição
 `wc -l` | Conta quantas linhas sobraram depois do filtro, ou seja, quantos comandos foram realmente executados via sudo.
 ---------------------------------
 
-#### Script Finalizado
+### Script Finalizado
 
 ```bash
 #!/bin/bash
@@ -858,28 +853,14 @@ wall -q "#Architecture: $arch
 
 -----------------------------------
 
-VERIFICAR!!!!!!!
-
-#### Rodar Script sem Senha
-
-INLCUIR LINK DO LOCAL!!
-> Essa etapa auxiliar'a apo's o script ser criado.
-
-#### Script de 10 em 10 minutos!
-
-INCLUIR LINK
-
-#### Rodar Script sem Senha
+## Rodar Script sem Senha
 
 Etapa: | Descrição
 |---|---|
 No terminal, `sudo visudo` | abre as configurações do Sudo
-Em `Allow members...` | Incluir `user ALL=(ALL) NOPASSWD:/usr/local/bin/monitoring.sh`
+Em `Allow members...` | Incluir `prondina ALL=(ALL) NOPASSWD:/usr/local/bin/monitoring.sh`
 
 ![alt text](image-14.png)
-
-------------------------------------
-
 
 --------------------------------------
 
