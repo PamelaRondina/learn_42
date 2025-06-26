@@ -777,7 +777,7 @@ wall -q "#Architecture: $arch
 Etapa: | Descrição
 |---|---|
 No terminal, `sudo visudo` | abre as configurações do Sudo
-Em `Allow members...` | Incluir `user ALL=(ALL) NOPASSWD: /usr/local/bin/monitoring.sh`
+Em `Allow members...` | Incluir `user ALL=(ALL) NOPASSWD:/usr/local/bin/monitoring.sh`
 
 ![alt text](image-14.png)
 
@@ -808,7 +808,8 @@ FYI `-e` | "editar" o arquivo crontab desse usuário
 
 Etapa: | Descrição
 |---|---|
-No arquivo, `*/10 * * * * /usr/local/bin/monitoring.sh`
+`@reboot sleep 40 /usr/local/bin/monitoring.sh` | Quando o sistema for iniciado (rebootado), espere 40 segundos e então execute o script monitoring.sh.
+No arquivo, `*/10 * * * * bash /usr/local/bin/monitoring.sh`
 FYI */10	| minuto: execute a cada 10 minutos
 FYI * |	hora: em todas as horas
 FYI *	| dia do mês: Em todos os dias do mês
@@ -816,10 +817,6 @@ FYI *	| mês: em todos os meses
 FYI * | dia da semana: em todos os dias da semana
 
 ![alt text](image-16.png)
-
-#*/2 * * * * bash /usr/local/bin/monitoring.sh | wall -q "$message" 2>/dev/null
-?????????
-
 
 --------------------------------------
 
