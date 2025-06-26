@@ -187,7 +187,9 @@ SSH - OK
 UFW
 SUDO
 
-# Configurar SSH
+# Configurar SSH - Parte 01 | 02
+
+SSH: EXPLICAR!!!!!!!!!!!!!!!!!!!
 
 > Aqui estaremos com usuario root --> Dono de Tudo, nao teremos necessidade de rodar os comandos com sudo!
 
@@ -213,7 +215,6 @@ Status SSH --> depois de `sudo service ssh restart` :
 
 ![alt text](image-5.png)
 
-
 # Conectar em dois terminais --> Linkar
 
 **VM via SSH Port 4242**
@@ -236,7 +237,7 @@ Etapa | Descrição
 `+` | Name: rule 1 \ Host Port: 4242 \ Guest Port: 4242
 OK e OK | 
 
-# Instalar Sudo
+# Configurar Sudo
 
 > Aqui estaremos com usuario root --> Dono de Tudo, nao teremos necessidade de rodar os comandos com sudo!
 
@@ -289,7 +290,8 @@ Defaults    secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
 Questions:
 1. O que é TTY para o sudo?
 
-## DEPOIS DO SUDO CRIADO! Retornar em SSH 
+# Configurar SSH - Parte 02 | 02
+
 Etapa | Descrição
 -|-
 `nano /etc/ssh/sshd_config` | abre as configurações do SSH
@@ -313,7 +315,7 @@ Etapa | Descrição
 ![alt text](image-6.png)
 
 
-### 07 Política de Senhas
+# Política de Senhas
 
 Etapa| Descrição
 -|-
@@ -957,3 +959,7 @@ Nirmal Gope - Part 2 | [Youtube - Mandatory Part](https://www.youtube.com/watch?
 
 
 @Ilbc27
+
+VERIFICAR!!!!
+sudo apt remove aptitude
+
