@@ -887,6 +887,8 @@ _________________________________________
 
 AJUSTAR NA ORDEM DA AVALIACAO!
 
+
+
 Etapa | Descricao
 |---|---|
 `sudo adduser new_user` | adiciona um novo usuario
@@ -956,4 +958,129 @@ Nirmal Gope - Part 2 | [Youtube - Mandatory Part](https://www.youtube.com/watch?
 
 VERIFICAR!!!!
 sudo apt remove aptitude
+
+
+
+# Subject - PT
+
+- Durante a defesa, você será questionada sobre o sistema operacional que escolheu.
+Por exemplo, você deve saber as diferenças entre `aptitude` e `apt`, ou o que são `SELinux` ou `AppArmor.`
+    - Resumindo: entenda o que você está usando! 🧠💻
+
+- Um serviço SSH estará rodando na porta obrigatória 4242 da sua máquina virtual.
+    - Por motivos de segurança, não pode ser possível conectar via SSH como root.
+
+- O uso do SSH será testado durante a defesa, criando uma nova conta.
+    - Você precisa, portanto, entender como o SSH funciona.
+
+- Você precisa configurar o sistema operacional com o firewall UFW (ou firewalld no caso do Rocky Linux) e, portanto:
+
+    - Somente a porta 4242 deve estar aberta na sua máquina virtual.
+    - O firewall deve estar ativado quando a máquina virtual for iniciada.
+    - Para Rocky, você deve usar o firewalld em vez do UFW.
+
+- O nome da máquina (hostname) deve ser o seu login terminado com 42: prondina42 (hostname)
+    - Você terá que modificar o hostname durante a avaliação.
+
+    - Você precisa implementar uma política de senha forte.
+
+    - Você deve instalar e configurar o sudo com regras rígidas.
+
+    - Além do usuário root, um usuário com o seu login também deve estar presente.
+        - Esse usuário deve pertencer aos grupos user42 e sudo.
+
+ - Durante a defesa, você terá que:
+    -    Criar um novo usuário
+    - tribuí-lo a um grupo
+
+- Para configurar uma política de senha forte, os seguintes requisitos devem ser seguidos:
+
+    - A senha deve expirar a cada 30 dias
+    - O número mínimo de dias antes de poder trocar a senha deve ser 2 dias
+    - O usuário deve receber um aviso 7 dias antes da senha expirar
+
+    - A senha deve:
+    - Ter no mínimo 10 caracteres
+    - Conter uma letra maiúscula, uma minúscula e um número
+    - Não pode conter mais de 3 caracteres idênticos consecutivos
+    - A senha não pode conter o nome do usuário.
+    - A nova senha deve ter pelo menos 7 caracteres diferentes da senha antiga.
+
+    - A seguinte regra não se aplica à senha do root:
+        - Mas é claro: a senha do root ainda precisa obedecer à política de senha forte mencionada antes (10+ caracteres, maiúscula, minúscula, número, sem repetições etc).
+
+    - Após configurar os arquivos de senha/política, você deve:
+        - Alterar todas as senhas dos usuários da sua VM, incluindo a senha do root.
+
+!!! 
+> ALTERAR TBM A SENHA DO ROOT
+!!!
+
+Configuração segura do grupo sudo (muito importante!):
+
+- Tentativas de autenticação via sudo devem ser limitadas a 3
+    - Se o usuário errar a senha 3 vezes, já era!
+
+- Deve ser exibida uma mensagem personalizada de erro se a senha do sudo estiver incorreta.
+
+- Cada ação que usar sudo deve ser registrada, incluindo:
+
+    - Tudo o que o usuário digitou (input)
+    - E tudo que foi exibido (output)
+
+!!! 
+> VERIFICAR SE O ARQUIVO DE LOG ESTA CORRETO
+!!!
+
+ - Esses registros devem ser salvos em: /var/log/sudo/ (OK)
+
+- O modo TTY (Terminal Teletype) deve estar habilitado
+    👉 Isso garante que os comandos sudo só possam ser usados a partir de um terminal real (evita automatizações maliciosas, por exemplo)
+
+- Os caminhos do sistema que sudo pode usar devem ser restritos, por segurança.
+    🧭 Os caminhos permitidos devem ser como este exemplo:
+
+`/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin`
+
+- Script monitoring.sh – o Grande Final! 🎬
+
+Você precisa criar um script simples chamado monitoring.sh.
+🔧 Ele deve ser feito em bash.
+`#! `
+
+- Quando esse script deve rodar?
+    - Toda vez que o servidor for iniciado (ligar a máquina)
+
+!!!
+> ASSIM QUE ABRE A MAQUINA JA RODA UM SCRIPT?
+
+
+-   A cada 10 minutos, automaticamente
+    - Dica: use o cron pra isso ⏱
+
+
+- O comando `wall` vai te ajudar a exibir a mensagem para todos os usuários logados no terminal.
+
+    - Nenhum erro deve aparecer quando o script rodar.
+
+O que seu script deve mostrar sempre que for executado?
+
+- A arquitetura do sistema e a versão do kernel
+    (ex: Linux x86_64 com uname -a)
+- O número de processadores físicos
+    (ex: via lscpu | grep Socket)
+- O número de processadores virtuais (vCPU)
+    (ex: nproc)
+- A quantidade de memória RAM usada/total e o percentual de uso
+- O espaço em disco usado/total e o percentual de uso
+- A utilização atual da CPU em porcentagem
+- A data e hora do último boot
+- Se o LVM está ativo ou não
+- A quantidade de conexões TCP ativas
+- A quantidade de usuários conectados
+- O endereço IPv4 e o MAC address da máquina
+- O número de comandos executados com sudo
+
+Durante a defesa do projeto, você será questionada sobre como o script funciona e como interromper a execução dele sem editá-lo.
+Isso significa que o script deve ser seguro, limpo, e fácil de parar 
 
