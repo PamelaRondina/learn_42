@@ -145,6 +145,18 @@ Questions:
 1. Por que estou separando as partições?
     Para que eu tenha espaços separados e que uma aplicação não interfira na outra.
 
+
+### Antes de Acessar a VM --> Liberar acesso a outro terminal
+
+> Tipo de conexão de rede da VM
+
+Se estiver usando NAT, talvez não consiga acessar a VM diretamente. Recomendo mudar para Bridged Adapter ou Host-only Adapter:
+
+1. Desligar a VM.
+2. No `Oracle VM VirtualBox Manager`> Settings > Network.
+3. Alterar de `NAT` para `Bridged Adapter`.
+4. Reinicia a VM.
+
 ### Acessar a VM
 
 Após as configurações da VM e criação das Partições, chegou o momento de acessar a VM. Finalizamos o passo anterior, o terminal da VM estará aberto.
@@ -242,15 +254,16 @@ Etapa | Descrição
 
 ![alt text](image-6.png)
 
-### Conectando...
+### Conectar em dois terminais --> Linkar
 
 **VM via SSH Port 4242**
 
 Etapa | Descrição
 -|-
-`ssh prondina@127.0.0.1 -p 4242` | conectar
-solicitará a senha -> yes
-`exit` | para sair
+No terminal da VM `hotsname -I` | recebe o valor de IP ex:10.12.123.45
+No terminal desejado `ssh prondina@10.12.123.45 -p 4242` | yes
+
+**********************************
 
 **SSH de fora do terminal da VM Port 4242**
 
@@ -401,7 +414,7 @@ Número	| Quem |	Permissão
 5	| 👨‍👩‍👧 Grupo	| Leitura (4) + Execução (1) = 5
 5	| 🌍 Outros	| Leitura (4) + Execução (1) = 5
 
-#### 1) A arquitetura do seu sistema operacional e sua versão do kernel.
+#### A arquitetura do seu sistema operacional e sua versão do kernel.
 
 ```bash
 #!/bin/bash
@@ -687,8 +700,64 @@ Etapa:  | Descrição
 `journalctl _COMM=sudo` | Puxa do `systemd journal` todas as entradas onde o programa executado foi “sudo”
 `grep COMMAND` | Filtra só as linhas que têm a palavra “COMMAND
 `wc -l` | Conta quantas linhas sobraram depois do filtro, ou seja, quantos comandos foram realmente executados via sudo.
+---------------------------------
 
+#### Script Finalizado
 
+```bash
+#!/bin/bash
+
+#Arquitetura
+arch=$(uname -a)
+
+#Processador fisico
+cpu_physical=$(lscpu | grep Socket | awk '{printf $2}')
+
+#Processador Virtual
+vcpu=$(nproc)
+
+#Memory Usage
+memory_usage=$(free -m | grep Mem | awk '{printf("%d/%dMB (%.2f%%)", $3, $2, $3/$2 * 100)}')
+
+#Disk Usage
+disk_usage=$(df -BG / | awk 'NR==2 {printf("%d/%dGb (%.0f%%)", $3, $2, $3/$2 * 100)}')
+
+#CPU Load
+cpu_load=$(top -bn1 | grep "Cpu(s)" | awk '{printf("%.1f%%", 100 - $8)}')
+
+#Last boot
+last_boot=$(who -b | awk '{print($3,$4)}')
+
+#LVM use
+lvm_use=$(lsblk | grep -q "lvm" && echo "yes" || echo "no")
+
+#Connections TCP
+connect_tcp=$(ss -ta | grep ESTAB | wc -l)
+
+#User log
+user_log=$(who | wc -l)
+
+#Networking
+ip_adress=$(hostname -I | awk '{printf $1}')
+ip_mac=$(ip link | grep ether | awk '{printf $2}')
+
+#Sudo cmd
+sudo=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
+
+echo "#Architecture: $arch
+#CPU physical: $cpu_physical
+#vCPU: $vcpu
+#Memory Usage: $memory_usage
+#Disk Usage: $disk_usage
+#CPU load: $cpu_load
+#Last boot: $last_boot
+#LVM use: $lvm_use
+#Connections TCP: $connect_tcp ESTABLISHED
+#User log: $user_log
+#Networking: $ip_adress ($ip_mac)
+#Sudo: $sudo cmd
+"
+```
 
 -----------------------------------
 
@@ -729,39 +798,44 @@ FYI `-e` | "editar" o arquivo crontab desse usuário
 Etapa: | Descrição
 |---|---|
 No arquivo, `*/10 * * * * /usr/local/bin/monitoring.sh`
-FYI | 
+FYI */10	| minuto: execute a cada 10 minutos
+FYI * |	hora: em todas as horas
+FYI *	| dia do mês: Em todos os dias do mês
+FYI *	| mês: em todos os meses
+FYI * | dia da semana: em todos os dias da semana
 
 ![alt text](image-16.png)
 
 
 --------------------------------------
-### Acessar VM _AJUSTAR ETAPA DEVE IR PARA O INICIO!***********
 
-> Tipo de conexão de rede da VM
+### Assinatura --> signature.txt
 
-Se estiver usando NAT, talvez não consiga acessar a VM diretamente. Recomendo mudar para Bridged Adapter ou Host-only Adapter:
-
-1. Desligar a VM.
-2. No `Oracle VM VirtualBox Manager`> Settings > Network.
-3. Alterar de `NAT` para `Bridged Adapter`.
-4. Reinicia a VM.
-
------------------------
-***AJUSTAR ETAPA!!!
-
-sudo service ssh status - verificar status do ssh (active de preferencia)
-sudo service ssh start | caso nao esteja ativo
-sudo nano /etc/ssh/sshd_config | arquivo de config de porta
-Port 4242 | ativa
-getent passwd pamela | confirmar user
-sudo adduser pamela | criar user
-sudo usermod -aG sudo pamela | NAO SEI
-
-sudo systemctl enable ssh
+Etapa: | Descrição
+|---|---|
+Desligue a VM | no aplicativo da Oracle VM
+NO terminao host (e nao na VM!) | Acesse a sua VM `cd /home/user/sgoinfre/born2berrot`
+busque o arquivo .vdi `shasum born2beroot.vdi` | gerara a assintura
+Copie o texto | Crie um arquivo .txt
 
 
 
-### 💻 Comandos básicos de gerenciamento Debian
+_________________________________________
+
+### 💻 Resumo -> Comandos Uteis para a Avaliacao
+
+Etapa | Descricao
+|---|---|
+`sudo adduser new_user` | adiciona um novo usuario
+`sudo addgroup new_group` | adiciona um novo grupo
+`getent group` | lista os grupos existentes 
+`getent group name_group` | verifica se o grupo existe
+`sudo adduser name_user name_group` | adiciona user ao grupo especifico
+`sudo service ssh status` ou `sudo systemctl status ssh` | verifica status ssh
+`sudo service ssh restart` | reunicia o servico ssh
+
+
+
 
  Comando | Explicação 
 -|-|
@@ -786,19 +860,18 @@ sudo systemctl enable ssh
 `sudo ufw enable` | ativar o firewall
 `sudo ufw allow 4242` | permitir acesso a porta 4242 do SSH
 `sudo ufw status` | visualizar o status das portas ALLOW (permitir)
-_________________________________________
 
-**Resumo -> Instalar Debian** 
+***AJUSTAR ETAPA!!!
 
-Etapa | . | Pra que serve?
--|-|-
-1 [baixar Debian](www.debian.org/download) | selecionar `amd64 debian-12.11.0...` | Gera um arquivo ISO
-2 Arquivo ISO | . | Gerado após realizar o download
-3 Transferir ISO | Vai para a pasta `home\sgoinfre` | Diretòrio com maior espaço
-4 Abrir VirtualBox | Um programa que ja esta instalado no pc | serve para realizar a leitura do arquivo ISO
-5 ETAPA NEW
+sudo service ssh status - verificar status do ssh (active de preferencia)
+sudo service ssh start | caso nao esteja ativo
+sudo nano /etc/ssh/sshd_config | arquivo de config de porta
+Port 4242 | ativa
+getent passwd pamela | confirmar user
+sudo adduser pamela | criar user
+sudo usermod -aG sudo pamela | NAO SEI
 
-
+sudo systemctl enable ssh
 ______________________________
 
 Referencias | link
