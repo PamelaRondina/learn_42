@@ -200,6 +200,20 @@ Etapa | Descrição
 Questions:
 1. O que é TTY para o sudo?
 
+#### Permitir Script sem Senha
+
+> Essa etapa auxiliar'a apo's o script ser criado.
+
+#### Rodar Script sem Senha
+
+Etapa: | Descrição
+|---|---|
+No terminal, `sudo visudo` | abre as configurações do Sudo
+Em `Allow members...` | Incluir `user ALL=(ALL) NOPASSWD: /usr/local/bin/monitoring.sh`
+
+![alt text](image-14.png)
+
+
 ### Configurar SSH
 
 Etapa | Descrição
@@ -473,9 +487,7 @@ Etapa: Memoria RAM | Descrição
 **Antes de comecar: para conhecimento!**
 
 > Todas Particoes montadas no sistema `df -h`
-
-```bash
-Filesystem      Size  Used Avail Use% Mounted on
+Permitir que o script seja executado sem uma senhaUse% Mounted on
 /dev/sda1        50G   20G   28G  42% /
 /dev/sda2        10G    5G    5G  50% /home
 tmpfs           2.0G     0  2.0G   0% /run
@@ -656,8 +668,7 @@ echo "#Networking: $ip_address ($ip_mac)"
 Etapa:  | Descrição
 |---|---|
 `hostname -I` | Mostra os endereços IP atribuídos às interfaces de rede 
-`awk '{print $1}'` | Imprime a primeira coluna
-ip link
+`awk '{print $1}'` | Imprime a primeira coluna ip link
 `ip link` | Mostra as interfaces de rede do sistema
 `grep ether` | contém o endereço MAC da interface 
 `awk '{print $2}` | Imprime a segunda coluna
@@ -676,9 +687,21 @@ echo "#Sudo: $sudo"
 
 Etapa:  | Descrição
 |---|---|
-`journalctl _COMM=sudo` | Puxa do systemd journal todas as entradas onde o programa executado foi “sudo”
+`journalctl _COMM=sudo` | Puxa do `systemd journal` todas as entradas onde o programa executado foi “sudo”
 `grep COMMAND` | Filtra só as linhas que têm a palavra “COMMAND
 `wc -l` | Conta quantas linhas sobraram depois do filtro, ou seja, quantos comandos foram realmente executados via sudo.
+
+-----------------------------------
+
+#### Rodar Script sem Senha
+
+Etapa: | Descrição
+|---|---|
+No terminal, `sudo visudo` | abre as configurações do Sudo
+Em `Allow members...` | Incluir `user ALL=(ALL) NOPASSWD: /usr/local/bin/monitoring.sh`
+
+![alt text](image-14.png)
+
 
 
 
