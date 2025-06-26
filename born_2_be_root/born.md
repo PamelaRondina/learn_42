@@ -151,7 +151,7 @@ Questions:
     Para que eu tenha espaços separados e que uma aplicação não interfira na outra.
 
 
-### 02. Antes de Acessar a VM --> Liberar acesso a outro terminal
+# Antes de Acessar a VM --> Liberar acesso a outro terminal
 
 Apos a VM criada, abrira o terminal da VM (que 'e pessimo para editar, apanhei bastante nele!)
 
@@ -164,7 +164,7 @@ Se estiver usando NAT, talvez não consiga acessar a VM diretamente. Recomendo m
 
 Antes, precisaremos instalar o SSH para demois acessar por outro terminal.
 
-### 03 Acessar a VM
+# Acessar a VM
 
 Após as configurações da VM e criação das Partições, chegou o momento de acessar a VM. 
 
@@ -183,11 +183,11 @@ comando `lsblk` | Mostra no terminal
 
 PRIMEIRO CRIAR A PORTA PARA ACESSO
 
-SSH
+SSH - OK
 UFW
 SUDO
 
-### 01 Configurar SSH
+# Configurar SSH
 
 > Aqui estaremos com usuario root --> Dono de Tudo, nao teremos necessidade de rodar os comandos com sudo!
 
@@ -200,11 +200,10 @@ Etapa | Descrição
 `#Port 22` | Alterar para `Port 4242` (eliminar o # para iniciar a ativacao da porta 4242)
 `CTRL+X YES ENTER` | Salvar e sair
 `service ssh status` | verifica o status do serviço SSH
-`sudo service ssh restart` | reinicia o SSH devido a nova porta 4242
+`service ssh restart` | reinicia o SSH devido a nova porta 4242
 `ssh -V` | verificar a versão do SSH (apenas para curiosidade!)
 
-
-
+![alt text](image-19.png)
 
 Status SSH --> antes de `sudo service ssh restart` :
 
@@ -215,15 +214,31 @@ Status SSH --> depois de `sudo service ssh restart` :
 ![alt text](image-5.png)
 
 
+# Conectar em dois terminais --> Linkar
 
+**VM via SSH Port 4242**
 
+Etapa | Descrição
+-|-
+No terminal da VM `hotsname -I` | recebe o valor de IP ex:10.12.123.45
+No terminal desejado `ssh prondina@10.12.123.45 -p 4242` | yes
 
+**********************************
 
+**SSH de fora do terminal da VM Port 4242**
 
+No app `Oracle VM VirtualBox Manager`.
 
+Etapa | Descrição
+-|-
+`Settings` | ...
+`Network` | clicar em Advanced\port Forwarding
+`+` | Name: rule 1 \ Host Port: 4242 \ Guest Port: 4242
+OK e OK | 
 
+# Instalar Sudo
 
-### 06 Instalar Sudo
+> Aqui estaremos com usuario root --> Dono de Tudo, nao teremos necessidade de rodar os comandos com sudo!
 
 > `sudo`: permite o usuário executar comandos com privilégios de root. Root é o dono da P* toda.
 
@@ -253,10 +268,23 @@ Etapa | Descrição
 `log_input, log_output` | entrada de logs e saída de logs
 `iolog_dir="/var/log/sudo"` | Define o diretório para salvar logs de entrada e saída adicionais.
 `requiretty` | Requer TTY para usar sudo.
-`secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin **:/snap/bin**"` | Limita os caminhos que podem ser usados ​​pelo sudo para executar comandos. 
+`secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"` | Limita os caminhos que podem ser usados ​​pelo sudo para executar comandos. 
 `CTRL+X YES ENTER` | Salvar e sair
 `sudo mkdir -p /var/log/sudo` | criar diretorio
 `sudo touch /var/log/sudo/sudo.log` | criar arquivo de logs
+
+```bash
+Defaults    env_reset
+Defaults    mail_badpass
+Defaults    passwd_tries=3
+Defaults    badpass_message="Password is wrong. Please try again."
+Defaults    logfile="/var/log/sudo/sudo.log"
+Defaults    log_input, log_output
+Defaults    iolog_dir="/var/log/sudo"
+Defaults    requiretty
+Defaults    secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+```
+![alt text](image-18.png)
 
 Questions:
 1. O que é TTY para o sudo?
@@ -264,41 +292,15 @@ Questions:
 ## DEPOIS DO SUDO CRIADO! Retornar em SSH 
 Etapa | Descrição
 -|-
+`nano /etc/ssh/sshd_config` | abre as configurações do SSH
 `#PermitRootLogin prohibit-password` | Alterar para `PermitRootLogin no`
 `CTRL+X YES ENTER` | Salvar e sair
 
-#### Rodar Script sem Senha
+![alt text](image-20.png)
 
-INLCUIR LINK DO LOCAL!!
-> Essa etapa auxiliar'a apo's o script ser criado.
 
-#### Script de 10 em 10 minutos!
 
-INCLUIR LINK
-
-### 01 Configurar SSH
-
-Etapa | Descrição
--|-
-`su -` | alterar para o root (incluir senha do hostname --> prondina42)
-`sudo apt install openssh-server -y` | Pacote de servidor que permite acessar a VM remotamente via terminal
-`sudo nano /etc/ssh/sshd_config` | abre as configurações do SSH
-`#Port 22` | Alterar para `Port 4242`
-`#PermitRootLogin prohibit-password` | Alterar para `PermitRootLogin no`
-`CTRL+X YES ENTER` | Salvar e sair
-`sudo service ssh status` | verifica o status do serviço SSH
-`sudo service ssh restart` | reinicia o SSH devido a nova porta 4242
-`ssh -V` | verificar a versão do SSH (apenas para curiosidade!)
-
-Status SSH --> antes de `sudo service ssh restart` :
-
-![alt text](image-4.png)
-
-Status SSH --> depois de `sudo service ssh restart` :
-
-![alt text](image-5.png)
-
-### 05 Configurar UFW
+# Configurar UFW
 
 Etapa | Descrição
 -|-
@@ -310,27 +312,6 @@ Etapa | Descrição
 
 ![alt text](image-6.png)
 
-### 04 Conectar em dois terminais --> Linkar
-
-**VM via SSH Port 4242**
-
-Etapa | Descrição
--|-
-No terminal da VM `hotsname -I` | recebe o valor de IP ex:10.12.123.45
-No terminal desejado `ssh prondina@10.12.123.45 -p 4242` | yes
-
-**********************************
-
-**SSH de fora do terminal da VM Port 4242**
-
-No app `Oracle VM VirtualBox Manager`.
-
-Etapa | Descrição
--|-
-`Settings` | ...
-`Network` | clicar em Advanced\port Forwarding
-`+` | Name: rule 1 \ Host Port: 4242 \ Guest Port: 4242
-OK e OK | 
 
 ### 07 Política de Senhas
 
@@ -827,6 +808,17 @@ wall -q "#Architecture: $arch
 ```
 
 -----------------------------------
+
+VERIFICAR!!!!!!!
+
+#### Rodar Script sem Senha
+
+INLCUIR LINK DO LOCAL!!
+> Essa etapa auxiliar'a apo's o script ser criado.
+
+#### Script de 10 em 10 minutos!
+
+INCLUIR LINK
 
 #### Rodar Script sem Senha
 
