@@ -344,28 +344,32 @@ Etapa: Instalar Bliblioca PAM  | Descrição
 
 ![alt text](image-8.png)
 
+```bash
+password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root
+```
+
 Etapa: Alterar senha do user | Descrição
 -|-
 `passwd` | Alterar senha do usuário atual para a nova política
 Current Password | Senha atual
 New password | nova senha (de acorda a nova política)
-`sudo chage -l user` | Lista as informações da expiração da senha de um usuário.
-`sudo chage -M 30 -m 2 -W 7 user` | Define regras de validade e segurança para a senha do user.
-`-M 30` | Máximo de 30 dias de validade da senha. Depois disso, o usuário é obrigado a trocar.
-`-m 2` | Mínimo de 2 dias entre trocas. 
-`-W 7` |  aviso com 7 dias de antecedência antes da senha expirar.
+`sudo chage -l prondina` | Lista as informações da expiração da senha de um usuário.
+`sudo chage -M 30 -m 2 -W 7 prondina` | Define regras de validade e segurança para a senha do user.
+FYI `-M 30` | Máximo de 30 dias de validade da senha. Depois disso, o usuário é obrigado a trocar.
+FYI `-m 2` | Mínimo de 2 dias entre trocas. 
+FYI `-W 7` |  aviso com 7 dias de antecedência antes da senha expirar.
 
 ![alt text](image-9.png)
 
-### Esqueci a senha do USER! E agora?!
+# Esqueci a senha do USER! E agora?!
 
 Pois e, ao testar na escola e em minha casa: fiz a grandissima manobra de esquecer a senha do user!
 
-Bora ajustar!
+Bora ajustar! :)
 
 Etapa | Descrição
 -|-
-No Starta da VM | Na tela do GRUB digitar `e` (para editar a entrada do boot)
+No Start da VM | Na tela do GRUB digitar `e` (para editar a entrada do boot)
 Encontra a linha `linux /vmlinux-6.1...quiet` | Adicione no final `init=/bin/bash`
 `CTRL+X YES ENTER` | Salvar e sair
 O sistema reinicia a VM no modo root | Vai solicitar a senha encriptada
@@ -378,33 +382,33 @@ Em seguida, `root@(none):/#` | adicionar `passwd user`
 
 FOTO CELULAR!!
 
-### 08 Criar `User` e `Groups`
+# Criar `User` e `Groups`
 
 Etapa: criar `user`| Descrição
 -|-
-`sudo adduser user_name` | @umnovologin42
+`sudo adduser prondina` | ilustracao, nao criaremos um novo usuario para a VM, e sim na Avaliacao!
 
 ![alt text](image-11.png)
 
 Etapa: Visualizar informacoes do `user`| Descrição
 -|-
-`getent passwd user` | comando que busca informações do usuário no banco de dados do tipo passwd
+`getent passwd prondina` | comando que busca informações do usuário no banco de dados do tipo passwd
 Retorno `user:x:1001:1001:Pam:/home/user:/bin/bash` | No terminal teremos essa resposta.
 user	Nome do usuário
-`x` |	Senha criptografada (fica em /etc/shadow)
-`1001` | 	UID (ID do usuário)
-`1001` |	GID (ID do grupo primário)
-`Pamela Rondina` | geralmente nome completo (comentario, descricao)
-`/home/user` | Diretório, home do usuário
-`/bin/bash` | Shell padrão do usuário
-`cut -d: -f1 /etc/passwd` | lista os usuarios existentesget
+FYI `x` |	Senha criptografada (fica em /etc/shadow)
+FYI `1001` | 	UID (ID do usuário)
+FYI `1001` |	GID (ID do grupo primário)
+FYI `Pamela Rondina` | geralmente nome completo (comentario, descricao)
+FYI `/home/user` | Diretório, home do usuário
+FYI `/bin/bash` | Shell padrão do usuário
+FYI `cut -d: -f1 /etc/passwd` | lista os usuarios existentes get
 
 
 ![alt text](image-12.png)
 
 Etapa: adicionar `group`| Descrição
 -|-
-`sudo addgroup nome_grupo` | cria um novo grupo
+`sudo addgroup user42` | cria um novo grupo
 
 ![alt text](image-13.png)
 
@@ -415,15 +419,16 @@ Etapa: visualizar `group` criados| Descrição
  `getent group | cut -d: -f1`
  | mostra apenas os nomes dos usuarios: (`cut` --> corta o texto em colunas; `-d:` --> delimitador : ; `-f1` --> nome do grupo)
  `getent group | wc -l` | conta quantos grupos existem
- `group user` | visualizar os grupos de um user espscifico
+ `groups user` | visualizar os grupos de um user especifico
 
 Etapa: adicionar `user` a um `group`| Descrição
 -|-
-`sudo adduser nome_user nome_grupo` | `user` adicionado ao `group`
+`sudo adduser prondina user42` | `user` adicionado ao `group`
 
-### 09 Criacao do Script
 
-> `sudo /usr/local/bin/monitoring.sg` --> rodar o script
+# 09 Criacao do Script
+
+> O Script deve rodar de 10 em 10 minutos no terminal.
 
 **Modelo**
 
@@ -441,6 +446,48 @@ Etapa: adicionar `user` a um `group`| Descrição
 #Network: IP 10.0.2.15 (08:00:27:51:9b:a5)
 #Sudo : 42 cmd
 ```
+## Ativar --> Crontab (robo de agendador de tarefas)
+
+> Utilizado para poder executar o script de 10 em 10 minutos!
+Etapa: | Descrição
+|---|---|
+No terminal, `sudo systemctl enable cron.service` | ativa o serviço con.service para iniciar automaticamente toda vez que o sistema for bootado (ligado/reiniciado).
+`sudo systemctl start cron.service` | iniciar o cron.
+
+> `sudo /usr/local/bin/monitoring.sh` --> rodar o script
+
+
+## Ativar --> Script: 10 em 10 minutos!
+
+Etapa: | Descrição
+|---|---|
+No terminal, `sudo crontab -u root -e` | 
+Solicitar'a a senha | Em seguida, escolhar a opcao `1`
+FYI `crontab` | agendador de tarefas
+FYI `-u root` |  editar o crontab do usuário root
+FYI `-e` | "editar" o arquivo crontab desse usuário
+
+![alt text](image-15.png)
+
+Etapa: | Descrição
+|---|---|
+`@reboot sleep 40 /usr/local/bin/monitoring.sh` | Quando o sistema for iniciado (rebootado), espere 40 segundos e então execute o script monitoring.sh.
+No arquivo, `*/10 * * * * bash /usr/local/bin/monitoring.sh`
+FYI */10	| minuto: execute a cada 10 minutos
+FYI * |	hora: em todas as horas
+FYI *	| dia do mês: Em todos os dias do mês
+FYI *	| mês: em todos os meses
+FYI * | dia da semana: em todos os dias da semana
+
+![alt text](image-16.png)
+
+
+
+
+
+> `sudo /usr/local/bin/monitoring.sg` --> rodar o script
+
+
 Etapa: criar script | Descrição
 -|-
 `sudo touch /usr/local/bin/monitoring.sh` | criar arquivo para exeutar o script
@@ -833,40 +880,6 @@ Em `Allow members...` | Incluir `user ALL=(ALL) NOPASSWD:/usr/local/bin/monitori
 
 ------------------------------------
 
-### Crontab
-
-Etapa: | Descrição
-|---|---|
-No terminal, `sudo systemctl enable cron.service` | ativa o serviço con.service para iniciar automaticamente toda vez que o sistema for bootado (ligado/reiniciado).
-`sudo reboot` | reiniciar a maquina
-
-> `sudo /usr/local/bin/monitoring.sh` --> rodar o script
-
---------------------------------------
-
-### Script de 10 em 10 minutos!
-
-Etapa: | Descrição
-|---|---|
-No terminal, `sudo crontab -u root -e` | 
-Solicitar'a a senha | Em seguida, escolhar a opcao `1`
-FYI `crontab` | agendador de tarefas
-FYI `-u root` |  editar o crontab do usuário root
-FYI `-e` | "editar" o arquivo crontab desse usuário
-
-![alt text](image-15.png)
-
-Etapa: | Descrição
-|---|---|
-`@reboot sleep 40 /usr/local/bin/monitoring.sh` | Quando o sistema for iniciado (rebootado), espere 40 segundos e então execute o script monitoring.sh.
-No arquivo, `*/10 * * * * bash /usr/local/bin/monitoring.sh`
-FYI */10	| minuto: execute a cada 10 minutos
-FYI * |	hora: em todas as horas
-FYI *	| dia do mês: Em todos os dias do mês
-FYI *	| mês: em todos os meses
-FYI * | dia da semana: em todos os dias da semana
-
-![alt text](image-16.png)
 
 --------------------------------------
 
