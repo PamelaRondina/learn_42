@@ -146,7 +146,7 @@ Questions:
     Para que eu tenha espaços separados e que uma aplicação não interfira na outra.
 
 
-### Antes de Acessar a VM --> Liberar acesso a outro terminal
+### 02. Antes de Acessar a VM --> Liberar acesso a outro terminal
 
 > Tipo de conexão de rede da VM
 
@@ -157,7 +157,7 @@ Se estiver usando NAT, talvez não consiga acessar a VM diretamente. Recomendo m
 3. Alterar de `NAT` para `Bridged Adapter`.
 4. Reinicia a VM.
 
-### Acessar a VM
+### 03 Acessar a VM
 
 Após as configurações da VM e criação das Partições, chegou o momento de acessar a VM. Finalizamos o passo anterior, o terminal da VM estará aberto.
 
@@ -174,7 +174,7 @@ comando `lsblk` | Mostra no terminal
 
 ![alt text](image-3.png)
 
-### Instalar Sudo
+### 06 Instalar Sudo
 
 > `sudo`: permite o usuário executar comandos com privilégios de root. Root é o dono da P* toda.
 
@@ -221,14 +221,14 @@ INLCUIR LINK DO LOCAL!!
 
 INCLUIR LINK
 
-### Configurar SSH
+### 01 Configurar SSH
 
 Etapa | Descrição
 -|-
 `sudo apt install openssh-server -y` | Pacote de servidor que permite acessar a VM remotamente via terminal
 `sudo nano /etc/ssh/sshd_config` | abre as configurações do SSH
 `#Port 22` | Alterar para `Port 4242`
-`#PermitRootLogin prohibit-passwaord` | Alterar para `PermitRootLogin no`
+`#PermitRootLogin prohibit-password` | Alterar para `PermitRootLogin no`
 `CTRL+X YES ENTER` | Salvar e sair
 `sudo service ssh status` | verifica o status do serviço SSH
 `sudo service ssh restart` | reinicia o SSH devido a nova porta 4242
@@ -242,7 +242,7 @@ Status SSH --> depois de `sudo service ssh restart` :
 
 ![alt text](image-5.png)
 
-### Configurar UFW
+### 05 Configurar UFW
 
 Etapa | Descrição
 -|-
@@ -254,7 +254,7 @@ Etapa | Descrição
 
 ![alt text](image-6.png)
 
-### Conectar em dois terminais --> Linkar
+### 04 Conectar em dois terminais --> Linkar
 
 **VM via SSH Port 4242**
 
@@ -276,7 +276,7 @@ Etapa | Descrição
 `+` | Name: rule 1 \ Host Port: 4242 \ Guest Port: 4242
 OK e OK | 
 
-### Política de Senhas
+### 07 Política de Senhas
 
 Etapa| Descrição
 -|-
@@ -339,7 +339,7 @@ Em seguida, `root@(none):/#` | adicionar `passwd user`
 
 FOTO CELULAR!!
 
-### Criar `User` e `Groups`
+### 08 Criar `User` e `Groups`
 
 Etapa: criar `user`| Descrição
 -|-
@@ -382,7 +382,7 @@ Etapa: adicionar `user` a um `group`| Descrição
 -|-
 `sudo adduser nome_user nome_grupo` | `user` adicionado ao `group`
 
-### Criacao do Script
+### 09 Criacao do Script
 
 > `sudo /usr/local/bin/monitoring.sg` --> rodar o script
 
@@ -534,12 +534,22 @@ Etapa: Memoria DISK | Descrição
 2 == total ($2)
 67% == ($3 / $2 * 100)
 ```
+ning: Permanently added '[10.12.243.76]:4242' (ED25519) to the list of known hosts.
+prondina@10.12.243.76's password: 
+Linux prondina42 6.1.0-37-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.140-1 (2025-05-22) x86_64
 
-> !!! Dica: `df -h / | awk '{print NR, $0}'`, mostra quantas linhas 
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
 
-#### CPU load: 6.7% --> 
-
-> Porcentagem de uso da CPU em um dado momento.
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Jun 26 12:37:37 2025 from 10.12.243.76
+prondina@prondina42:~$ sudo nano /usr/local/bin/monitoring.sh 
+[sudo] password for prondina: 
+prondina@prondina42:~$ sudo nano /usr/local/bin/monitoring.sh 
+prondina@prondina42:~$ sudo /usr/local/bin/monitoring.sh 
+m dado momento.
 
 ```bash
 cpu_load=$(top -bn1 | grep "Cpu(s)" | awk '{printf("%1.f%%", 100 - $8)}')
@@ -687,7 +697,7 @@ Etapa:  | Descrição
 
 > 
 ```bash
-sudo=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
+sudo=$(journalctl -q _COMM=sudo | grep COMMAND | wc -l)
 echo "#Sudo: $sudo"
 ```
 
@@ -698,6 +708,7 @@ echo "#Sudo: $sudo"
 Etapa:  | Descrição
 |---|---|
 `journalctl _COMM=sudo` | Puxa do `systemd journal` todas as entradas onde o programa executado foi “sudo”
+`-q` | para nao ter hint no script
 `grep COMMAND` | Filtra só as linhas que têm a palavra “COMMAND
 `wc -l` | Conta quantas linhas sobraram depois do filtro, ou seja, quantos comandos foram realmente executados via sudo.
 ---------------------------------
@@ -742,9 +753,9 @@ ip_adress=$(hostname -I | awk '{printf $1}')
 ip_mac=$(ip link | grep ether | awk '{printf $2}')
 
 #Sudo cmd
-sudo=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
+sudo=$(journalctl -q _COMM=sudo | grep COMMAND | wc -l)
 
-echo "#Architecture: $arch
+wall -q "#Architecture: $arch
 #CPU physical: $cpu_physical
 #vCPU: $vcpu
 #Memory Usage: $memory_usage
@@ -779,7 +790,7 @@ Etapa: | Descrição
 No terminal, `sudo systemctl enable cron.service` | ativa o serviço con.service para iniciar automaticamente toda vez que o sistema for bootado (ligado/reiniciado).
 `sudo reboot` | reiniciar a maquina
 
-> `sudo /usr/local/bin/monitoring.sg` --> rodar o script
+> `sudo /usr/local/bin/monitoring.sh` --> rodar o script
 
 --------------------------------------
 
@@ -806,6 +817,9 @@ FYI * | dia da semana: em todos os dias da semana
 
 ![alt text](image-16.png)
 
+#*/2 * * * * bash /usr/local/bin/monitoring.sh | wall -q "$message" 2>/dev/null
+?????????
+
 
 --------------------------------------
 
@@ -823,6 +837,8 @@ Copie o texto | Crie um arquivo .txt
 _________________________________________
 
 ### 💻 Resumo -> Comandos Uteis para a Avaliacao
+
+AJUSTAR NA ORDEM DA AVALIACAO!
 
 Etapa | Descricao
 |---|---|
@@ -860,6 +876,12 @@ Etapa | Descricao
 `sudo ufw enable` | ativar o firewall
 `sudo ufw allow 4242` | permitir acesso a porta 4242 do SSH
 `sudo ufw status` | visualizar o status das portas ALLOW (permitir)
+`hostname -I ` (na VM) | buscar IP
+`ssh user@IP -p 4242` | acessar de outro terminal
+`sudo ufw status` | portas ativas
+`sudo ufw allow nnumero_porta` | acessa e cria uma porta para ser o firewall
+`nano /etc/pam.d/common-password` | acessa o arquivo para alterar a polica de senhas
+
 
 ***AJUSTAR ETAPA!!!
 
