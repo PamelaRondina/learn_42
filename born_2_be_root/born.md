@@ -200,15 +200,14 @@ Etapa | Descrição
 Questions:
 1. O que é TTY para o sudo?
 
-#### Permitir Script sem Senha
-
-> Essa etapa auxiliar'a apo's o script ser criado.
-
 #### Rodar Script sem Senha
 
 INLCUIR LINK DO LOCAL!!
+> Essa etapa auxiliar'a apo's o script ser criado.
 
+#### Script de 10 em 10 minutos!
 
+INCLUIR LINK
 
 ### Configurar SSH
 
@@ -372,6 +371,8 @@ Etapa: adicionar `user` a um `group`| Descrição
 
 ### Criacao do Script
 
+> `sudo /usr/local/bin/monitoring.sg` --> rodar o script
+
 **Modelo**
 
 ```c
@@ -478,7 +479,7 @@ Etapa: Memoria RAM | Descrição
 `free -m` | mostra o quanto de memoria em MB esta sendo utilizado (destaque para total($2) e used($3))
 `awk '{printf("%d/%dMB (%.2f%%)", $3, $2, $3/$2 * 100)}')` | Vai printar o tamanho em MB da memoria usada e total e apresentar em %
 
-#### #Disk Usage: 1009/2Gb (49%) --> Memoria Disk 
+#### Disk Usage: 1009/2Gb (49%) --> Memoria Disk 
 
 **Antes de comecar: para conhecimento!**
 
@@ -687,6 +688,8 @@ Etapa:  | Descrição
 `grep COMMAND` | Filtra só as linhas que têm a palavra “COMMAND
 `wc -l` | Conta quantas linhas sobraram depois do filtro, ou seja, quantos comandos foram realmente executados via sudo.
 
+
+
 -----------------------------------
 
 #### Rodar Script sem Senha
@@ -707,8 +710,32 @@ Etapa: | Descrição
 No terminal, `sudo systemctl enable cron.service` | ativa o serviço con.service para iniciar automaticamente toda vez que o sistema for bootado (ligado/reiniciado).
 `sudo reboot` | reiniciar a maquina
 
+> `sudo /usr/local/bin/monitoring.sg` --> rodar o script
+
 --------------------------------------
-### Acessar VM _AJUSTAR ETAPA!***********
+
+### Script de 10 em 10 minutos!
+
+Etapa: | Descrição
+|---|---|
+No terminal, `sudo crontab -u root -e` | 
+Solicitar'a a senha | Em seguida, escolhar a opcao `1`
+FYI `crontab` | agendador de tarefas
+FYI `-u root` |  editar o crontab do usuário root
+FYI `-e` | "editar" o arquivo crontab desse usuário
+
+![alt text](image-15.png)
+
+Etapa: | Descrição
+|---|---|
+No arquivo, `*/10 * * * * /usr/local/bin/monitoring.sh`
+FYI | 
+
+![alt text](image-16.png)
+
+
+--------------------------------------
+### Acessar VM _AJUSTAR ETAPA DEVE IR PARA O INICIO!***********
 
 > Tipo de conexão de rede da VM
 
