@@ -2,9 +2,9 @@
 
 O projeto consiste na criação de uma VM (Máquina Virtual), onde faremos ajustes em:
 
-- 
 - Sudo;
 - SSH;
+- UFW;
 - Política de senhas;
 
 
