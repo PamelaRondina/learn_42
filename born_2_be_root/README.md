@@ -1,4 +1,4 @@
-# Born 2 be Root
+ Born 2 be Root
 
 O projeto consiste na criação de uma VM (Máquina Virtual), onde faremos ajustes em:
 
@@ -925,6 +925,20 @@ Senhas 2:  | `sudo nano /etc/pam.d/common-password`
 Criar um grupo evaluating | `sudo addgroup evaluating`
 Adicionar usuario criado ao grupo | `sudo adduser novo_user evaluating`
 
+Etapa: Hostname e Particoes | Descricao
+|---|---|
+mostrar hostname | `username` ou `hostname?`
+alterar hostname 1: | `sudo nano /etc/hostname`
+alterar hostname 2: | `sudo nano /etc/hosts` e em seguida, `sudo reboot`
+Se o nome do hostname nao foi alterado a avaliacao acaba AQUI | ATENCAOO!!
+Restaurar o nome do host para o anterior | repetir os passos acima (lembre-se de fazer o reboot!)
+visualizar as particoes | `lsblk`
+Comparar as particoes conforme o exemplo do subject | analisar 
+Como a LVM funciona e do que se trata? | LVM (Logical Volume Manager) é um sistema que permite gerenciar o espaço em disco de forma flexível, como redimensionar partições, adicionar discos e criar volumes lógicos facilmente.
+
+Etapa: Sudo | Descricao
+|---|---|
+O que 'e uma Ma
 
 Etapa | Descricao
 |---|---|
