@@ -896,6 +896,8 @@ Onde seu arquivo `.vdi` esta localizado? | onde salvei a maquina `sgoinfre`
 Clone da maquina original | Agora sim... let's go!
 Verifique se não estão sendo usados snapshots | Ainda no terminal do computador e nao da VM `VBoxManage snapshot "born2beroot" list`
 
+----------------------------
+
 Etapa: Visao Geral do Projeto | Descricao
 |---|---|
 Como funciona uma máquina virtual |  Emula uma maquina utilizando a infraestrutura local da minha maquina atraves de um hipervisor **VirtualBox**
@@ -906,6 +908,8 @@ Diferenca: aptitude e apt | Ambas sao utilizados para gerenciar pacotes e distri
 O que APPArmor é | Ferramenta de seguranca do Linux 
 Durante a defesa, um script deve exibir informações a cada 10 minutos | ANALISAR SCRIPT!!!!!!!!!!!!!!!!!!!!??????????
 
+----------------------------
+
 Etapa: Configuracao Simples | Descricao
 |---|---|
 Certifique-se de que a máquina não tem um ambiente gráfico no lançamento | a VM acessa diretamente o terminal
@@ -914,6 +918,8 @@ Conecte-se com um usuário, que nao seja root | prondina @Ilp1
 Verifique se o serviço UFW é iniciado com a ajuda do aluno sendo avaliado | `sudo ufw status`
 Verifique se o serviço SSH é iniciado com a ajuda do aluno sendo avaliado | `sudo service ssh status`
 Verifique se o sistema operacional escolhido é Debian ou Rocky com a ajuda do aluno sendo avaliado | `uname -a`
+
+----------------------------
 
 Etapa: Usuário | Descricao
 |---|---|
@@ -924,6 +930,8 @@ Senhas 1:  | `nano/etc/login.defs` Foi alterado dias minimos e maximo
 Senhas 2:  | `sudo nano /etc/pam.d/common-password` 
 Criar um grupo evaluating | `sudo addgroup evaluating`
 Adicionar usuario criado ao grupo | `sudo adduser novo_user evaluating`
+
+----------------------------
 
 Etapa: Hostname e Particoes | Descricao
 |---|---|
@@ -936,6 +944,8 @@ visualizar as particoes | `lsblk`
 Comparar as particoes conforme o exemplo do subject | analisar 
 Como a LVM funciona e do que se trata? | LVM (Logical Volume Manager) é um sistema que permite gerenciar o espaço em disco de forma flexível, como redimensionar partições, adicionar discos e criar volumes lógicos facilmente.
 
+----------------------------
+
 Etapa: Sudo | Descricao
 |---|---|
 Verifique se possui o sistema sudo | `sudo -V`
@@ -947,23 +957,44 @@ Verifique se a pasta "/var/log/sudo/" existe e tem pelo menos um arquivo. | ok
 Alterar para usuario root | su -
 Abrir o arquivo dendo de "/var/log/sudo/" | ok e dat um `cat sudo_config`, rodar comando via sudo e atualizar o arquivo
 
+----------------------------
+
 Etapa: UFW | Descricao
 |---|---|
 Verificar se o Programa UFW esta instalado | `sudo service ufw status`
-o que 'e UFW? |  Uncomplicated Firewall --> monitora o trafego de rede entrada e saída e decide bloquear ou permitir o tráfego. Controla o acesso as porta no caso 4242
+o que 'e UFW? |  UFW (Uncomplicated Firewall) é uma ferramenta de configuração de firewall simplificada para sistemas Linux. Ela controla o tráfego de rede (entrada e saída) e decide quais portas devem ser abertas ou bloqueadas, com regras simples.
 Listar as regras ativas no UFW (ou Firewalld). Uma regra deve existir para a porta 4242 | `sudo ufw status`
 Criar uma porta 8080 | `sudo ufw allow 8080`
 Deletar porta 8080 | `sudo ufw delete allow 8080`
 Verificar se foi deletada | `sudo ufw status`
+
+----------------------------
+
+Etapa: SSH | Descricao
+|---|---|
+Versao SSH | `ssh -V`
+Verificar se esta funcionando | `sudo service ssh status`
+O que 'e SSH? | SSH (Secure Shell) é um protocolo de comunicação segura usado para acessar e administrar sistemas remotamente via terminal, protegendo os dados com criptografia. Permite controle total da máquina como se você estivesse fisicamente nela. 
+Verifique se o serviço SSH usa apenas a porta 4242 na máquina virtual | No terminal normal `ssh nome_user@hostname-I -p 4242` A MEU APARECE MAIS DE UM AJUSTAR `ss -tuln (pipe) grep 4242`
+Testar com o root (nao deve acessar) | `nome_user@hostname-I -p 4242`
+
+----------------------------
+
+Etapa: Regras Script| Descricao
+|---|---|
+
+
+----------------------------
 
 Etapa: Outros | Descricao
 |---|---|
 Kernel | Uma forma de fazer o hardware e o software se comunicarem
 Hypervisor | Um programa que permite criar e gerenciar VMs, 'VirtualBox'
 
-O que 'e SSH? | Secure Shell --> protocolo de comunicacao segura que permite acessar outro computador remotamente via terminal
+
 sudo systemctl start ssh ou ssh service start(?????) | Iniciar servico SSH
 
+----------------------------
 
 sudo ufw allow 4242 | liberar a porta
 sudo ufw deny 23 | bloquear a porta
