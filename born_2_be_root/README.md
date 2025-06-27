@@ -896,22 +896,33 @@ Onde seu arquivo `.vdi` esta localizado? | onde salvei a maquina `sgoinfre`
 Clone da maquina original | Agora sim... let's go!
 Verifique se não estão sendo usados snapshots | Ainda no terminal do computador e nao da VM `VBoxManage snapshot "born2beroot" list`
 
+Etapa: Visao Geral do Projeto | Descricao
+|---|---|
+Como funciona uma máquina virtual |  Emula uma maquina utilizando a infraestrutura local da minha maquina atraves de um hipervisor **VirtualBox**
+A sua escolha do sistema operacional | Conforme orientado pelo subject: Debian, por ser uma distribuicao mais estavel e segura
+Diferenças básicas entre Rocky e Debian| Ambas sao distribuicao Linux, a maior diferenca 'e que Rock 'e baseado em RedHat. Debian 'e cnhecido por ser de codigo aberto, com uma ampla comunidade e Rocky ;e mais usado em ambiente corporativo apt e dnf
+O objetivo das máquinas virtuais.| Seguimentar maquinas menores dentro de uma maquina principal 
+Diferenca: aptitude e apt | Ambas sao utilizados para gerenciar pacotes e distribuicoes, apt utilizado na linha de comando e ja vem instalado, aptitude mais poderosa, interface interativa e resolucao automatica
+O que APPArmor é | Ferramenta de seguranca do Linux 
+Durante a defesa, um script deve exibir informações a cada 10 minutos | ANALISAR SCRIPT!!!!!!!!!!!!!!!!!!!!??????????
 
-
-
+Etapa: Configuracao Simples | Descricao
+|---|---|
+Certifique-se de que a máquina não tem um ambiente gráfico no lançamento 
+Uma senha será necessária antes de tentar se conectar a esta máquina. 
+Finalmente, conecte-se com um usuário com a ajuda do aluno sendo avaliado. 
+Este usuário não deve ser root. 
+Preste atenção à senha escolhida, deve seguir as regras impostas no assunto.
+Verifique se o serviço UFW é iniciado com a ajuda do aluno sendo avaliado.
+Verifique se o serviço SSH é iniciado com a ajuda do aluno sendo avaliado.
+Verifique se o sistema operacional escolhido é Debian ou Rocky com a ajuda do aluno sendo avaliado. 
 
 Etapa | Descricao
 |---|---|
 O que 'e uma Maquina Virtual (VM)? | Uma m'aquina dentro da minha maquina
-Como uma VM funciona? | Emula uma maquina utilizando a infraestrutura local da minha maquina. 
-Qual 'e o proposito de uma VM? | Seguimentar maquinas menores dentro de uma maquina principal
-O que 'e Debian e Rock? | Sistema operacional de Distribuicoes linux
-Suas diferencas? | Ambas sao distribuicao LInux, a maior diferenca 'e que Rock 'e baseado em RedHat
 kernel | Uma forma de fazer o hardware e o software se comunicarem
 O que 'e um Hypervisor? | Um programa que permite criar e gerenciar VMs, 'VirtualBox'
 O que sao LVM (Particoes)? | ??????
-Diferenca de apt e aptitude | Ambas sao utilizados para gerenciar pacotes e distribuicoes, apt utilizado na linha de comando e ja vem instalado, aptitude mais poderosa, interface interativa
-O que 'e APPrmor? | ferramenta de seguranca do Linux 
 
 
 
