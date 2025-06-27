@@ -915,6 +915,29 @@ Verifique se o serviço UFW é iniciado com a ajuda do aluno sendo avaliado | `s
 Verifique se o serviço SSH é iniciado com a ajuda do aluno sendo avaliado | `sudo service ssh status`
 Verifique se o sistema operacional escolhido é Debian ou Rocky com a ajuda do aluno sendo avaliado | `uname -a`
 
+Etapa: Usuário | Descricao
+|---|---|
+Exibir grupos de usuário prondina | `getent group sudo user42`
+Criar um novo usuário | `sudo adduser novo_user` 
+Por que a regra de senha 'e aplicada? Quais sao suas vantagens e desvantagens? | ??
+Senhas 1:  | `nano/etc/login.defs` Foi alterado dias minimos e maximo
+Senhas 2:  | `sudo nano /etc/pam.d/common-password` 
+Criar um grupo evaluating | `sudo addgroup evaluating`
+Adicionar grupo criado a o 
+
+
+á
+no assunto sobre sua máquina virtual.
+Normalmente deve haver um ou dois arquivos modificados. Se surgir algum problema, a avaliação pára aqui.
+
+    Agora que você tem um novo usuário, peça ao aluno que está sendo avaliado para criar um grupo chamado "avaliando" em
+    diante de você e atribuí-lo a este usuário. Finalmente, verifique se esse usuário pertence ao grupo "avaliador".
+
+    Por fim, peça ao aluno que está sendo avaliado para explicar as vantagens desta política de senha, bem como a
+    vantagens e desvantagens de sua implementação. Claro, respondendo que é porque o assunto pede
+    porque não conta.
+
+
 Etapa | Descricao
 |---|---|
 O que 'e uma Maquina Virtual (VM)? | Uma m'aquina dentro da minha maquina
