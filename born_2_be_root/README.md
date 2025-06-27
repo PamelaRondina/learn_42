@@ -908,14 +908,12 @@ Durante a defesa, um script deve exibir informações a cada 10 minutos | ANALIS
 
 Etapa: Configuracao Simples | Descricao
 |---|---|
-Certifique-se de que a máquina não tem um ambiente gráfico no lançamento 
-Uma senha será necessária antes de tentar se conectar a esta máquina. 
-Finalmente, conecte-se com um usuário com a ajuda do aluno sendo avaliado. 
-Este usuário não deve ser root. 
-Preste atenção à senha escolhida, deve seguir as regras impostas no assunto.
-Verifique se o serviço UFW é iniciado com a ajuda do aluno sendo avaliado.
-Verifique se o serviço SSH é iniciado com a ajuda do aluno sendo avaliado.
-Verifique se o sistema operacional escolhido é Debian ou Rocky com a ajuda do aluno sendo avaliado. 
+Certifique-se de que a máquina não tem um ambiente gráfico no lançamento | a VM acessa diretamente o terminal
+Uma senha será necessária antes de tentar se conectar a esta máquina | a senha criptografada @Ilbc42
+Conecte-se com um usuário, que nao seja root | prondina @Ilp1 
+Verifique se o serviço UFW é iniciado com a ajuda do aluno sendo avaliado | `sudo ufw status`
+Verifique se o serviço SSH é iniciado com a ajuda do aluno sendo avaliado | `sudo service ssh status`
+Verifique se o sistema operacional escolhido é Debian ou Rocky com a ajuda do aluno sendo avaliado | `uname -a`
 
 Etapa | Descricao
 |---|---|
