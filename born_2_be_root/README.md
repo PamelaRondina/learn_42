@@ -16,7 +16,7 @@ Programa que permite criar e gerenciar VMs no computador. Utilizado para criar u
 Tipo de Hipervisor, utilizaremos o `Tipo 2: Hoste`
 Tipo | Nome | Utilizado em | Exemplos
 -|-|-|-
- 1 | Bare Metal | Funciona direto no hardware (igual sistema operacional). Utilizados em ambiente de servidores | VMWarevESXi, Microsoft Hyper-V, Proxmox
+ 1 | Bare Metal | Funciona direto n hardware (igual sistema operacional). Utilizados em ambiente de servidores | VMWarevESXi, Microsoft Hyper-V, Proxmox
  2 | Hosted | Roda dentro do sistema operacional (Windowns, Linux), um programa dentro do sistema | VirtualBox, VMware
 
 ## 2 - Distribuiçao Linux
@@ -195,7 +195,7 @@ SSH: EXPLICAR!!!!!!!!!!!!!!!!!!!
 
 Etapa | Descrição
 -|-
-`su -` | alterar para o root (incluir senha do hostname --> prondina42)
+`su -` | alterar para o root (incluir senha do hostname --> prondina42)su
 `apt update` | atualiza a lista de pacotes disponíveis nos repositórios
 `apt install openssh-server -y` | Pacote de servidor que permite acessar a VM remotamente via terminal
 `nano /etc/ssh/sshd_config` | abre as configurações do SSH
@@ -885,7 +885,6 @@ _________________________________________
 
 ### 💻 Resumo -> Comandos Uteis para a Avaliacao
 
-AJUSTAR NA ORDEM DA AVALIACAO!
 
 Etapa: Instrucoes Gerais | Descricao
 |---|---|
@@ -895,9 +894,7 @@ Analisar o arquivos | `diff signature.txt arquivo2.txt
 Onde seu arquivo `.vdi` esta localizado? | onde salvei a maquina `sgoinfre`
 Clone da maquina original | Agora sim... let's go!
 Verifique se não estão sendo usados snapshots | Ainda no terminal do computador e nao da VM `VBoxManage snapshot "born2beroot" list`
-
-----------------------------
-
+|***********|**********|
 Etapa: Visao Geral do Projeto | Descricao
 |---|---|
 Como funciona uma máquina virtual |  Emula uma maquina utilizando a infraestrutura local da minha maquina atraves de um hipervisor **VirtualBox**
@@ -907,9 +904,7 @@ O objetivo das máquinas virtuais | Seguimentar maquinas menores dentro de uma m
 Diferenca: aptitude e apt | Ambas sao utilizados para gerenciar pacotes e distribuicoes, apt utilizado na linha de comando e ja vem instalado, aptitude mais poderosa, interface interativa e resolucao automatica
 O que APPArmor é | Ferramenta de seguranca do Linux 
 Durante a defesa, um script deve exibir informações a cada 10 minutos
-
-----------------------------
-
+|***********|**********|
 Etapa: Configuracao Simples | Descricao
 |---|---|
 Certifique-se de que a máquina não tem um ambiente gráfico no lançamento | a VM acessa diretamente o terminal
@@ -918,24 +913,20 @@ Conecte-se com um usuário, que nao seja root | prondina @Ilp1
 Verifique se o serviço UFW é iniciado com a ajuda do aluno sendo avaliado | `sudo ufw status`
 Verifique se o serviço SSH é iniciado com a ajuda do aluno sendo avaliado | `sudo service ssh status`
 Verifique se o sistema operacional escolhido é Debian ou Rocky com a ajuda do aluno sendo avaliado | `uname -a`
-
-----------------------------
-
+|***********|**********|
 Etapa: Usuário | Descricao
 |---|---|
 Exibir grupos de usuário prondina | `getent group sudo user42` ou `groups prondina`
-sudo | `sudo adduser novo_user` 
+Adicionar usuario | `sudo adduser novo_user` 
 Por que a regra de senha 'e aplicada? Quais sao suas vantagens e desvantagens? | Serve para proteger o sistema contra ataques. V: senhas fortes e seguras. D: senhas complicadas podem ser anotadas em locais de facil acesso por terceiros
 Senhas 1:  | `nano/etc/login.defs` Foi alterado dias minimos e maximo
 Senhas 2:  | `sudo nano /etc/pam.d/common-password` 
 Criar um grupo evaluating | `sudo addgroup evaluating`
 Adicionar usuario criado ao grupo | `sudo adduser novo_user evaluating`
-
-----------------------------
-
+|***********|**********|
 Etapa: Hostname e Particoes | Descricao
 |---|---|
-mostrar hostname | `username` ou `hostname?`
+mostrar hostname |  `hostname?`
 alterar hostname 1: | `sudo nano /etc/hostname`
 alterar hostname 2: | `sudo nano /etc/hosts` e em seguida, `sudo reboot`
 Se o nome do hostname nao foi alterado a avaliacao acaba AQUI | ATENCAOO!!
@@ -943,45 +934,35 @@ Restaurar o nome do host para o anterior | repetir os passos acima (lembre-se de
 visualizar as particoes | `lsblk`
 Comparar as particoes conforme o exemplo do subject | analisar 
 Como a LVM funciona e do que se trata? | LVM (Logical Volume Manager) é um sistema que permite gerenciar o espaço em disco de forma flexível, como redimensionar partições, adicionar discos e criar volumes lógicos facilmente.
-
-----------------------------
-
+|***********|**********|
 Etapa: Sudo | Descricao
 |---|---|
 Verifique se possui o sistema sudo | `sudo -V`
 Adicionar usuario criado ao sudo | `sudo adduser novo_user sudo`
 Verifica se deu certo | `getent group sudo`
 O que 'e sudo?| SuperUser DO. Ele permite que usuários comuns executem comandos com privilégios de administrador, de forma temporária e controlada.
-Implementacao das regras sudo | `nano /etc/sudoers.d/sudo_config` ou `sudo visudo`
-Verifique se a pasta "/var/log/sudo/" existe e tem pelo menos um arquivo. | ok 
-Alterar para usuario root | su -
-Abrir o arquivo dendo de "/var/log/sudo/" | ok e dat um `cat sudo_config`, rodar comando via sudo e atualizar o arquivo
-
-----------------------------
-
+Implementacao das regras sudo | `sudo visudo`
+Alterar para usuario root | su - (senha do root)
+Verifique se a pasta "/var/log/sudo/" existe e tem pelo menos um arquivo. | visualizar com o **root**
+Abrir o arquivo dentro de "/var/log/sudo/" | ok e dar um `cat sudo_config`, rodar comando via sudo e atualizar o arquivo
+|***********|**********|
 Etapa: UFW | Descricao
 |---|---|
-Verificar se o Programa UFW esta instalado | `sudo service ufw status`
+Verificar se o Programa UFW esta instalado | `sudo ufw status`
 o que 'e UFW? |  UFW (Uncomplicated Firewall) é uma ferramenta de configuração de firewall simplificada para sistemas Linux. Ela controla o tráfego de rede (entrada e saída) e decide quais portas devem ser abertas ou bloqueadas, com regras simples.
 Listar as regras ativas no UFW (ou Firewalld). Uma regra deve existir para a porta 4242 | `sudo ufw status`
 Criar uma porta 8080 | `sudo ufw allow 8080`
 Deletar porta 8080 | `sudo ufw delete allow 8080`
 Verificar se foi deletada | `sudo ufw status`
-
-----------------------------
-
+|***********|**********|
 Etapa: SSH | Descricao
-|---|---|
+|---|---|ss -tunlp
 Versao SSH | `ssh -V`
 Verificar se esta funcionando | `sudo service ssh status`
 O que 'e SSH? | SSH (Secure Shell) é um protocolo de comunicação segura usado para acessar e administrar sistemas remotamente via terminal, protegendo os dados com criptografia. Permite controle total da máquina como se você estivesse fisicamente nela. 
-Verifique se o serviço SSH usa apenas a porta 4242 na máquina virtual | No terminal normal `ssh nome_user@hostname-I -p 4242` A MEU APARECE MAIS DE UM AJUSTAR `ss -tuln (pipe) grep 4242`
+Verifique se o serviço SSH usa apenas a porta 4242 na máquina virtual | No terminal normal `ssh nome_user@hostname-I -p 4242` e `ss -tuln (pipe) grep 4242`
 Testar com o root (nao deve acessar) | `nome_user@hostname-I -p 4242`
-
-???????? VERIFICAR A TAL PORTA 68
-
-----------------------------
-
+|***********|**********|
 Etapa: Regras Script| Descricao
 |---|---|
 como funciona o script | `sudo nano /usr/local/bin/moniroting.sh`
