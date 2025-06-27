@@ -54,7 +54,7 @@ Quando não marcamos (ticamos) esse elemento, o VirtualBox tenta automatizar o p
 
 > A ideia do projeto é para criarmos todos esses elementos, um projeto do ZERO!
 
-![alt text](image.png)
+![alt text](/born_2_be_root/images/image.png)
 
 Proxima etapa, alocar memória:
 
@@ -82,7 +82,7 @@ NAO ticar `Enable EFI` | Extensible Firmware Interface (Ele pode causar problema
 
 MELHORAR: APRENDER MAIS!!!!!!
 
-![alt text](image-1.png)
+![alt text](/born_2_be_root/image-1.png)
 
 Próxima e ultima etapa, `Virtual Hard Disk`
 
@@ -91,7 +91,7 @@ Etapa | O que fazer?
 Tamanho do Disco | 8gb
 Ticar `Pre-allocate Full size`| VirtualBox já separa 8 GB de espaço físico no computador, mesmo que o Debian só use 1 GB por enquanto. NÃO marcar, vai ocupar espaço aos poucos, conforme o Debian for precisando.
 
-![alt text](image-2.png)
+![alt text](/born_2_be_root/images/image-2.png)
 
 ### Operar Sistema de Instalação
 
@@ -177,7 +177,7 @@ login | username --> prondina
 senha | criada anteriormente
 comando `lsblk` | Mostra no terminal 
 
-![alt text](image-3.png)
+![alt text](/born_2_be_root/images/image-3.png)
 
 
 
@@ -205,15 +205,15 @@ Etapa | Descrição
 `service ssh restart` | reinicia o SSH devido a nova porta 4242
 `ssh -V` | verificar a versão do SSH (apenas para curiosidade!)
 
-![alt text](image-19.png)
+![alt text](/born_2_be_root/images/image-19.png)
 
 Status SSH --> antes de `sudo service ssh restart` :
 
-![alt text](image-4.png)
+![alt text](/born_2_be_root/images/image-4.png)
 
 Status SSH --> depois de `sudo service ssh restart` :
 
-![alt text](image-5.png)
+![alt text](/born_2_be_root/images/image-5.png)
 
 # Conectar em dois terminais --> Linkar
 
@@ -285,7 +285,7 @@ Defaults    iolog_dir="/var/log/sudo"
 Defaults    requiretty
 Defaults    secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
 ```
-![alt text](image-18.png)
+![alt text](/born_2_be_root/images/image-18.png)
 
 Questions:
 1. O que é TTY para o sudo?
@@ -298,7 +298,7 @@ Etapa | Descrição
 `#PermitRootLogin prohibit-password` | Alterar para `PermitRootLogin no`
 `CTRL+X YES ENTER` | Salvar e sair
 
-![alt text](image-20.png)
+![alt text](/born_2_be_root/images/image-20.png)
 
 
 
@@ -312,7 +312,7 @@ Etapa | Descrição
 `sudo ufw status` | visualizar o status das portas ALLOW (permitir)
 `VERIFICAR !!! ` | verificar a versão do UFW (apenas para curiosidade!)
 
-![alt text](image-6.png)
+![alt text](/born_2_be_root/images/image-6.png)
 
 
 # Política de Senhas
@@ -324,7 +324,7 @@ Etapa| Descrição
 `PASS_MIN_DAYS 0` | alterar para `PASS_MIN_DAYS 2`
 `CTRL+X YES ENTER` | Salvar e sair
 
-![alt text](image-7.png)
+![alt text]/born_2_be_root/images/(image-7.png)
 
 Etapa: Instalar Bliblioca PAM  | Descrição
 -|-
@@ -342,7 +342,7 @@ Etapa: Instalar Bliblioca PAM  | Descrição
 `CTRL+X YES ENTER` | Salvar e sair
 `sudo reboot` | reinicia o sistema com segurança 
 
-![alt text](image-8.png)
+![alt text](/born_2_be_root/images/image-8.png)
 
 ```bash
 password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root
@@ -359,7 +359,7 @@ FYI `-M 30` | Máximo de 30 dias de validade da senha. Depois disso, o usuário 
 FYI `-m 2` | Mínimo de 2 dias entre trocas. 
 FYI `-W 7` |  aviso com 7 dias de antecedência antes da senha expirar.
 
-![alt text](image-9.png)
+![alt text](/born_2_be_root/images/image-9.png)
 
 # Esqueci a senha do USER! E agora?!
 
@@ -378,7 +378,7 @@ Em seguida, `root@(none):/#` | adicionar `passwd user`
 `New passaword` | adicionar nova senha conforme politicas de senhas e repita a etapa
 `reboot` | caso de erro, `exec /sbin/init`
  
-![alt text](image-10.png)
+![alt text](/born_2_be_root/images/image-10.png)
 
 FOTO CELULAR!!
 
@@ -388,7 +388,7 @@ Etapa: criar `user`| Descrição
 -|-
 `sudo adduser prondina` | ilustracao, nao criaremos um novo usuario para a VM, e sim na Avaliacao!
 
-![alt text](image-11.png)
+![alt text](/born_2_be_root/images/image-11.png)
 
 Etapa: Visualizar informacoes do `user`| Descrição
 -|-
@@ -404,13 +404,13 @@ FYI `/bin/bash` | Shell padrão do usuário
 FYI `cut -d: -f1 /etc/passwd` | lista os usuarios existentes get
 
 
-![alt text](image-12.png)
+![alt text](/born_2_be_root/images/image-12.png)
 
 Etapa: adicionar `group`| Descrição
 -|-
 `sudo addgroup user42` | cria um novo grupo
 
-![alt text](image-13.png)
+![alt text](/born_2_be_root/images/image-13.png)
 
 Etapa: visualizar `group` criados| Descrição
 -|-
@@ -467,7 +467,7 @@ FYI `crontab` | agendador de tarefas
 FYI `-u root` |  editar o crontab do usuário root
 FYI `-e` | "editar" o arquivo crontab desse usuário
 
-![alt text](image-15.png)
+![alt text](/born_2_be_root/images/image-15.png)
 
 Etapa: | Descrição
 |---|---|
@@ -479,7 +479,7 @@ FYI *	| dia do mês: Em todos os dias do mês
 FYI *	| mês: em todos os meses
 FYI * | dia da semana: em todos os dias da semana
 
-![alt text](image-16.png)
+![alt text](/born_2_be_root/images/image-16.png)
 
 ## Criar --> aquivo de Script
 
@@ -860,7 +860,7 @@ Etapa: | Descrição
 No terminal, `sudo visudo` | abre as configurações do Sudo
 Em `Allow members...` | Incluir `prondina ALL=(ALL) NOPASSWD:/usr/local/bin/monitoring.sh`
 
-![alt text](image-14.png)
+![alt text](/born_2_be_root/images/image-14.png)
 
 --------------------------------------
 
@@ -873,7 +873,7 @@ NO terminao host (e nao na VM!) | Acesse a sua VM `cd /home/user/sgoinfre/born2b
 busque o arquivo .vdi `shasum NomeDaMaquina.vdi` | gerara a assintura
 Copie o texto | Crie um arquivo `signature.txt`
 
-![alt text](image-17.png)
+![alt text](/born_2_be_root/images/image-17.png)
 
 > Esse arquivo em signature.txt que deve ser enviado no github da escola!
 
