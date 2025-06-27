@@ -887,10 +887,47 @@ _________________________________________
 
 AJUSTAR NA ORDEM DA AVALIACAO!
 
+Etapa: Instrucoes Gerais | Descricao
+|---|---|
+An'alise do arquivo "signature.txt" | arquivo txt enviado para o Git da escola
+Antes de clocar a maquina (JAMAIS DAR START NA ORIGINAL) | acessar a VM pelo terminal do proprio computador e fazer `shasum nomeProjeto.vdi`, guardar o numero em um arquivo.txt
+Analisar o arquivos | `diff signature.txt arquivo2.txt
+Onde seu arquivo `.vdi` esta localizado? | onde salvei a maquina `sgoinfre`
+Clone da maquina original | Agora sim... let's go!
+Verifique se não estão sendo usados snapshots | Ainda no terminal do computador e nao da VM `VBoxManage snapshot "born2beroot" list`
+
+
+
 
 
 Etapa | Descricao
 |---|---|
+O que 'e uma Maquina Virtual (VM)? | Uma m'aquina dentro da minha maquina
+Como uma VM funciona? | Emula uma maquina utilizando a infraestrutura local da minha maquina. 
+Qual 'e o proposito de uma VM? | Seguimentar maquinas menores dentro de uma maquina principal
+O que 'e Debian e Rock? | Sistema operacional de Distribuicoes linux
+Suas diferencas? | Ambas sao distribuicao LInux, a maior diferenca 'e que Rock 'e baseado em RedHat
+kernel | Uma forma de fazer o hardware e o software se comunicarem
+O que 'e um Hypervisor? | Um programa que permite criar e gerenciar VMs, 'VirtualBox'
+O que sao LVM (Particoes)? | ??????
+Diferenca de apt e aptitude | Ambas sao utilizados para gerenciar pacotes e distribuicoes, apt utilizado na linha de comando e ja vem instalado, aptitude mais poderosa, interface interativa
+O que 'e APPrmor? | ferramenta de seguranca do Linux 
+
+
+
+O que 'e SSH? | Secure Shell --> protocolo de comunicacao segura que permite acessar outro computador remotamente via terminal
+sudo systemctl start ssh ou ssh service start(?????) | Iniciar servico SSH
+
+o que 'e UFW? |  Uncomplicated Firewall --> monitora o trafego de rede entrada e saída e decide bloquear ou permitir o tráfego. Controla o acesso as porta no caso 4242
+sudo ufw allow 4242 | liberar a porta
+sudo ufw deny 23 | bloquear a porta
+sudo ufw reset | resetar tudo
+
+???????? VERIFICAR A TAL PORTA 68
+
+GRUPO E USERS
+
+
 `sudo adduser new_user` | adiciona um novo usuario
 `sudo addgroup new_group` | adiciona um novo grupo
 `getent group` | lista os grupos existentes 
@@ -898,6 +935,11 @@ Etapa | Descricao
 `sudo adduser name_user name_group` | adiciona user ao grupo especifico
 `sudo service ssh status` ou `sudo systemctl status ssh` | verifica status ssh
 `sudo service ssh restart` | reunicia o servico ssh
+
+CRONTAB
+
+cron? | programa para gerenciar scrips automaticos
+ sudo crontab -u root -e | acessar script
 
 
 
@@ -944,13 +986,6 @@ sudo usermod -aG sudo pamela | NAO SEI
 
 sudo systemctl enable ssh
 ______________________________
-
-Referencias | link
--|-
-Instalar | [Debian](www.debian.org/distrib/netinst)
-Guide | [born2beroot](https://github.com/chlimous/42-born2beroot_guide)
-Nirmal Gope - Part 1 | [Youtube - Mandatory Part](https://www.youtube.com/watch?v=s2eM7L_etzo) 
-Nirmal Gope - Part 2 | [Youtube - Mandatory Part](https://www.youtube.com/watch?v=3Vw0HlJHLTQ) 
 
 
 
@@ -1084,3 +1119,12 @@ O que seu script deve mostrar sempre que for executado?
 Durante a defesa do projeto, você será questionada sobre como o script funciona e como interromper a execução dele sem editá-lo.
 Isso significa que o script deve ser seguro, limpo, e fácil de parar 
 
+
+-------------------------------------
+
+Referencias | link
+-|-
+Instalar | [Debian](www.debian.org/distrib/netinst)
+Guide | [born2beroot](https://github.com/chlimous/42-born2beroot_guide)
+Nirmal Gope - Part 1 | [Youtube - Mandatory Part](https://www.youtube.com/watch?v=s2eM7L_etzo) 
+Nirmal Gope - Part 2 | [Youtube - Mandatory Part](https://www.youtube.com/watch?v=3Vw0HlJHLTQ) 
