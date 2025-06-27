@@ -941,32 +941,30 @@ Etapa: Sudo | Descricao
 Verifique se possui o sistema sudo | `sudo -V`
 Adicionar usuario criado ao sudo | `sudo adduser novo_user sudo`
 Verifica se deu certo | `getent group sudo`
-O que 'e sudo?| SuperUser do: usuario executam comandos como administradores, 'e temporario.
-Implementacao das regras sudo | `nano /etc/sudoers.d/sudo_config`
+O que 'e sudo?| SuperUser DO. Ele permite que usuários comuns executem comandos com privilégios de administrador, de forma temporária e controlada.
+Implementacao das regras sudo | `nano /etc/sudoers.d/sudo_config` ou `sudo visudo`
 Verifique se a pasta "/var/log/sudo/" existe e tem pelo menos um arquivo. | ok 
 Alterar para usuario root | su -
 Abrir o arquivo dendo de "/var/log/sudo/" | ok e dat um `cat sudo_config`, rodar comando via sudo e atualizar o arquivo
 
-
-
-
- Verifique o conteúdo dos arquivos nesta pasta, Você deve ver um histórico dos comandos usados com sudo. Finalmente, tente executar um comando via sudo. Veja se o arquivo (s) na pasta "/var/log/sudo/sudo/" foram atualizados. Se algo não funciona como esperado ou não é claramente explicado, a avaliação pára aqui.
-
-
-
-Etapa | Descricao
+Etapa: UFW | Descricao
 |---|---|
-O que 'e uma Maquina Virtual (VM)? | Uma m'aquina dentro da minha maquina
-kernel | Uma forma de fazer o hardware e o software se comunicarem
-O que 'e um Hypervisor? | Um programa que permite criar e gerenciar VMs, 'VirtualBox'
-O que sao LVM (Particoes)? | ??????
+Verificar se o Programa UFW esta instalado | `sudo service ufw status`
+o que 'e UFW? |  Uncomplicated Firewall --> monitora o trafego de rede entrada e saída e decide bloquear ou permitir o tráfego. Controla o acesso as porta no caso 4242
+Listar as regras ativas no UFW (ou Firewalld). Uma regra deve existir para a porta 4242 | `sudo ufw status`
+Criar uma porta 8080 | `sudo ufw allow 8080`
+Deletar porta 8080 | `sudo ufw delete allow 8080`
+Verificar se foi deletada | `sudo ufw status`
 
-
+Etapa: Outros | Descricao
+|---|---|
+Kernel | Uma forma de fazer o hardware e o software se comunicarem
+Hypervisor | Um programa que permite criar e gerenciar VMs, 'VirtualBox'
 
 O que 'e SSH? | Secure Shell --> protocolo de comunicacao segura que permite acessar outro computador remotamente via terminal
 sudo systemctl start ssh ou ssh service start(?????) | Iniciar servico SSH
 
-o que 'e UFW? |  Uncomplicated Firewall --> monitora o trafego de rede entrada e saída e decide bloquear ou permitir o tráfego. Controla o acesso as porta no caso 4242
+
 sudo ufw allow 4242 | liberar a porta
 sudo ufw deny 23 | bloquear a porta
 sudo ufw reset | resetar tudo
