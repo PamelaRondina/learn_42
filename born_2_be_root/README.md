@@ -902,11 +902,11 @@ Etapa: Visao Geral do Projeto | Descricao
 |---|---|
 Como funciona uma máquina virtual |  Emula uma maquina utilizando a infraestrutura local da minha maquina atraves de um hipervisor **VirtualBox**
 A sua escolha do sistema operacional | Conforme orientado pelo subject: Debian, por ser uma distribuicao mais estavel e segura
-Diferenças básicas entre Rocky e Debian| Ambas sao distribuicao Linux, a maior diferenca 'e que Rock 'e baseado em RedHat. Debian 'e cnhecido por ser de codigo aberto, com uma ampla comunidade e Rocky ;e mais usado em ambiente corporativo apt e dnf
-O objetivo das máquinas virtuais.| Seguimentar maquinas menores dentro de uma maquina principal 
+Diferenças básicas entre Rocky e Debian | Ambas sao distribuicao Linux, a maior diferenca 'e que Rock 'e baseado em RedHat. Debian 'e cnhecido por ser de codigo aberto, com uma ampla comunidade e Rocky ;e mais usado em ambiente corporativo apt e dnf
+O objetivo das máquinas virtuais | Seguimentar maquinas menores dentro de uma maquina principal 
 Diferenca: aptitude e apt | Ambas sao utilizados para gerenciar pacotes e distribuicoes, apt utilizado na linha de comando e ja vem instalado, aptitude mais poderosa, interface interativa e resolucao automatica
 O que APPArmor é | Ferramenta de seguranca do Linux 
-Durante a defesa, um script deve exibir informações a cada 10 minutos | ANALISAR SCRIPT!!!!!!!!!!!!!!!!!!!!??????????
+Durante a defesa, um script deve exibir informações a cada 10 minutos
 
 ----------------------------
 
@@ -924,7 +924,7 @@ Verifique se o sistema operacional escolhido é Debian ou Rocky com a ajuda do a
 Etapa: Usuário | Descricao
 |---|---|
 Exibir grupos de usuário prondina | `getent group sudo user42` ou `groups prondina`
-Criar um novo usuário | `sudo adduser novo_user` 
+sudo | `sudo adduser novo_user` 
 Por que a regra de senha 'e aplicada? Quais sao suas vantagens e desvantagens? | Serve para proteger o sistema contra ataques. V: senhas fortes e seguras. D: senhas complicadas podem ser anotadas em locais de facil acesso por terceiros
 Senhas 1:  | `nano/etc/login.defs` Foi alterado dias minimos e maximo
 Senhas 2:  | `sudo nano /etc/pam.d/common-password` 
@@ -978,11 +978,16 @@ O que 'e SSH? | SSH (Secure Shell) é um protocolo de comunicação segura usado
 Verifique se o serviço SSH usa apenas a porta 4242 na máquina virtual | No terminal normal `ssh nome_user@hostname-I -p 4242` A MEU APARECE MAIS DE UM AJUSTAR `ss -tuln (pipe) grep 4242`
 Testar com o root (nao deve acessar) | `nome_user@hostname-I -p 4242`
 
+???????? VERIFICAR A TAL PORTA 68
+
 ----------------------------
 
 Etapa: Regras Script| Descricao
 |---|---|
-
+como funciona o script | `sudo nano /usr/local/bin/moniroting.sh`
+O que é "cron" |  programa agendador de tarefas
+Mostrar o script do crontab | `sudo cronta -e`, alterar para a cada minuto (alterar de 10 para 1)
+Parar o script de funcionar quando o servidor tiver iniciado, mas sem modificar o próprio script Para verificar este ponto, você terá que reiniciar o servidor uma última vez. Na inicialização, será necessário verificar se o roteiro ainda existe no mesmo lugar, que seus direitos permaneceram inalterados e que não foi modificado. | comentar `#@reboot sleep 40 && /usr/local/bin/monitoring.sh`
 
 ----------------------------
 
@@ -991,16 +996,8 @@ Etapa: Outros | Descricao
 Kernel | Uma forma de fazer o hardware e o software se comunicarem
 Hypervisor | Um programa que permite criar e gerenciar VMs, 'VirtualBox'
 
-
-sudo systemctl start ssh ou ssh service start(?????) | Iniciar servico SSH
-
 ----------------------------
 
-sudo ufw allow 4242 | liberar a porta
-sudo ufw deny 23 | bloquear a porta
-sudo ufw reset | resetar tudo
-
-???????? VERIFICAR A TAL PORTA 68
 
 GRUPO E USERS
 
@@ -1015,13 +1012,10 @@ GRUPO E USERS
 
 CRONTAB
 
-cron? | programa para gerenciar scrips automaticos
+cron? |
  sudo crontab -u root -e | acessar script
 
 
- Comando | Explicação 
--|-|
-`lsblk` | lista os discos e partições conectadas 
 **SUDO** | ------
 `su -` | alterar do usuario atual para o root
 `apt` | gerenciador de pacotes do Debian/Ubuntu
@@ -1049,10 +1043,7 @@ cron? | programa para gerenciar scrips automaticos
 `nano /etc/pam.d/common-password` | acessa o arquivo para alterar a polica de senhas
 
 
-***AJUSTAR ETAPA!!!
 
-sudo service ssh status - verificar status do ssh (active de preferencia)
-sudo service ssh start | caso nao esteja ativo
 sudo nano /etc/ssh/sshd_config | arquivo de config de porta
 Port 4242 | ativa
 getent passwd pamela | confirmar user
