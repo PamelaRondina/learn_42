@@ -938,7 +938,21 @@ Como a LVM funciona e do que se trata? | LVM (Logical Volume Manager) é um sist
 
 Etapa: Sudo | Descricao
 |---|---|
-O que 'e uma Ma
+Verifique se possui o sistema sudo | `sudo -V`
+Adicionar usuario criado ao sudo | `sudo adduser novo_user sudo`
+Verifica se deu certo | `getent group sudo`
+O que 'e sudo?| SuperUser do: usuario executam comandos como administradores, 'e temporario.
+Implementacao das regras sudo | `nano /etc/sudoers.d/sudo_config`
+Verifique se a pasta "/var/log/sudo/" existe e tem pelo menos um arquivo. | ok 
+Alterar para usuario root | su -
+Abrir o arquivo dendo de "/var/log/sudo/" | ok e dat um `cat sudo_config`, rodar comando via sudo e atualizar o arquivo
+
+
+
+
+ Verifique o conteúdo dos arquivos nesta pasta, Você deve ver um histórico dos comandos usados com sudo. Finalmente, tente executar um comando via sudo. Veja se o arquivo (s) na pasta "/var/log/sudo/sudo/" foram atualizados. Se algo não funciona como esperado ou não é claramente explicado, a avaliação pára aqui.
+
+
 
 Etapa | Descricao
 |---|---|
