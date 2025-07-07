@@ -879,8 +879,6 @@ Copie o texto | Crie um arquivo `signature.txt`
 
 
 
-
-
 _________________________________________
 
 ### 💻 Resumo -> Comandos Uteis para a Avaliacao
@@ -896,7 +894,6 @@ Clone da maquina original | Agora sim... let's go!
 Verifique se não estão sendo usados snapshots | Ainda no terminal do computador e nao da VM `VBoxManage snapshot "born2beroot" list`
 |***********|**********|
 Etapa: Visao Geral do Projeto | Descricao
-|---|---|
 Como funciona uma máquina virtual |  Emula uma maquina utilizando a infraestrutura local da minha maquina atraves de um hipervisor **VirtualBox**
 A sua escolha do sistema operacional | Conforme orientado pelo subject: Debian, por ser uma distribuicao mais estavel e segura
 Diferenças básicas entre Rocky e Debian | Ambas sao distribuicao Linux, a maior diferenca 'e que Rock 'e baseado em RedHat. Debian 'e cnhecido por ser de codigo aberto, com uma ampla comunidade e Rocky ;e mais usado em ambiente corporativo apt e dnf
@@ -915,7 +912,6 @@ Verifique se o serviço SSH é iniciado com a ajuda do aluno sendo avaliado | `s
 Verifique se o sistema operacional escolhido é Debian ou Rocky com a ajuda do aluno sendo avaliado | `uname -a`
 |***********|**********|
 Etapa: Usuário | Descricao
-|---|---|
 Exibir grupos de usuário prondina | `getent group sudo user42` ou `groups prondina`
 Adicionar usuario | `sudo adduser novo_user` 
 Por que a regra de senha 'e aplicada? Quais sao suas vantagens e desvantagens? | Serve para proteger o sistema contra ataques. V: senhas fortes e seguras. D: senhas complicadas podem ser anotadas em locais de facil acesso por terceiros
@@ -925,7 +921,6 @@ Criar um grupo evaluating | `sudo addgroup evaluating`
 Adicionar usuario criado ao grupo | `sudo adduser novo_user evaluating`
 |***********|**********|
 Etapa: Hostname e Particoes | Descricao
-|---|---|
 mostrar hostname |  `hostname?`
 alterar hostname 1: | `sudo nano /etc/hostname`
 alterar hostname 2: | `sudo nano /etc/hosts` e em seguida, `sudo reboot`
@@ -936,7 +931,6 @@ Comparar as particoes conforme o exemplo do subject | analisar
 Como a LVM funciona e do que se trata? | LVM (Logical Volume Manager) é um sistema que permite gerenciar o espaço em disco de forma flexível, como redimensionar partições, adicionar discos e criar volumes lógicos facilmente.
 |***********|**********|
 Etapa: Sudo | Descricao
-|---|---|
 Verifique se possui o sistema sudo | `sudo -V`
 Adicionar usuario criado ao sudo | `sudo adduser novo_user sudo`
 Verifica se deu certo | `getent group sudo`
@@ -947,7 +941,6 @@ Verifique se a pasta "/var/log/sudo/" existe e tem pelo menos um arquivo. | visu
 Abrir o arquivo dentro de "/var/log/sudo/" | ok e dar um `cat sudo_config`, rodar comando via sudo e atualizar o arquivo
 |***********|**********|
 Etapa: UFW | Descricao
-|---|---|
 Verificar se o Programa UFW esta instalado | `sudo ufw status`
 o que 'e UFW? |  UFW (Uncomplicated Firewall) é uma ferramenta de configuração de firewall simplificada para sistemas Linux. Ela controla o tráfego de rede (entrada e saída) e decide quais portas devem ser abertas ou bloqueadas, com regras simples.
 Listar as regras ativas no UFW (ou Firewalld). Uma regra deve existir para a porta 4242 | `sudo ufw status`
@@ -956,7 +949,7 @@ Deletar porta 8080 | `sudo ufw delete allow 8080`
 Verificar se foi deletada | `sudo ufw status`
 |***********|**********|
 Etapa: SSH | Descricao
-|---|---|ss -tunlp
+ss -tunlp
 Versao SSH | `ssh -V`
 Verificar se esta funcionando | `sudo service ssh status`
 O que 'e SSH? | SSH (Secure Shell) é um protocolo de comunicação segura usado para acessar e administrar sistemas remotamente via terminal, protegendo os dados com criptografia. Permite controle total da máquina como se você estivesse fisicamente nela. 
@@ -964,25 +957,21 @@ Verifique se o serviço SSH usa apenas a porta 4242 na máquina virtual | No ter
 Testar com o root (nao deve acessar) | `nome_user@hostname-I -p 4242`
 |***********|**********|
 Etapa: Regras Script| Descricao
-|---|---|
 como funciona o script | `sudo nano /usr/local/bin/moniroting.sh`
 O que é "cron" |  programa agendador de tarefas
 Mostrar o script do crontab | `sudo cronta -e`, alterar para a cada minuto (alterar de 10 para 1)
 Parar o script de funcionar quando o servidor tiver iniciado, mas sem modificar o próprio script Para verificar este ponto, você terá que reiniciar o servidor uma última vez. Na inicialização, será necessário verificar se o roteiro ainda existe no mesmo lugar, que seus direitos permaneceram inalterados e que não foi modificado. | comentar `#@reboot sleep 40 && /usr/local/bin/monitoring.sh`
-
-----------------------------
-
+|***********|**********|
 Etapa: Outros | Descricao
-|---|---|
 Kernel | Uma forma de fazer o hardware e o software se comunicarem
 Hypervisor | Um programa que permite criar e gerenciar VMs, 'VirtualBox'
 
 ----------------------------
 
-
 GRUPO E USERS
 
-
+Comando | Descricao
+|----|----|
 `sudo adduser new_user` | adiciona um novo usuario
 `sudo addgroup new_group` | adiciona um novo grupo
 `getent group` | lista os grupos existentes 
