@@ -449,6 +449,7 @@ Etapa: adicionar `user` a um `group`| Descrição
 ## Ativar --> Crontab (robo de agendador de tarefas)
 
 > Utilizado para poder executar o script de 10 em 10 minutos!
+
 Etapa: | Descrição
 |---|---|
 No terminal, `sudo systemctl enable cron.service` | ativa o serviço con.service para iniciar automaticamente toda vez que o sistema for bootado (ligado/reiniciado).
@@ -481,7 +482,7 @@ FYI * | dia da semana: em todos os dias da semana
 
 ![alt text](/born_2_be_root/images/image-16.png)
 
-## Criar --> aquivo de Script
+## Criar --> arquivo de Script
 
 Etapa: criar script | Descrição
 -|-
@@ -578,7 +579,9 @@ Etapa: Memoria RAM | Descrição
 **Antes de comecar: para conhecimento!**
 
 > Todas Particoes montadas no sistema `df -h`
-Permitir que o script seja executado sem uma senhaUse% Mounted on
+> 
+```
+Permitir que o script seja executado sem uma senha Use % Mounted on
 /dev/sda1        50G   20G   28G  42% /
 /dev/sda2        10G    5G    5G  50% /home
 tmpfs           2.0G     0  2.0G   0% /run
@@ -599,8 +602,9 @@ echo "#Disk Usage: $disk_usage"
 ```
 
 ```c
-#Disk Usage: 1009/2Gb (49%)á tranquilo, vou te ajudar a montar o script com as explicações para você sacar tudo de verdade e se 
+#Disk Usage: 1009/2Gb (49%)
 ```
+
 > Verificar o Disco Rigido
 
 Etapa: Memoria DISK | Descrição
@@ -615,22 +619,6 @@ Etapa: Memoria DISK | Descrição
 2 == total ($2)
 67% == ($3 / $2 * 100)
 ```
-ning: Permanently added '[10.12.243.76]:4242' (ED25519) to the list of known hosts.
-prondina@10.12.243.76's password: 
-Linux prondina42 6.1.0-37-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.140-1 (2025-05-22) x86_64
-
-The programs included with the Debian GNU/Linux system are free software;
-the exact distribution terms for each program are described in the
-individual files in /usr/share/doc/*/copyright.
-
-Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
-permitted by applicable law.
-Last login: Thu Jun 26 12:37:37 2025 from 10.12.243.76
-prondina@prondina42:~$ sudo nano /usr/local/bin/monitoring.sh 
-[sudo] password for prondina: 
-prondina@prondina42:~$ sudo nano /usr/local/bin/monitoring.sh 
-prondina@prondina42:~$ sudo /usr/local/bin/monitoring.sh 
-m dado momento.
 
 ```bash
 cpu_load=$(top -bn1 | grep "Cpu(s)" | awk '{printf("%1.f%%", 100 - $8)}')
@@ -987,6 +975,7 @@ cron? |
 
 
 **SUDO** | ------
+|---|---|
 `su -` | alterar do usuario atual para o root
 `apt` | gerenciador de pacotes do Debian/Ubuntu
 `apt update` | atualiza a lista de pacotes disponíveis 
