@@ -1000,16 +1000,12 @@ cron? |
 `sudo ufw status` | portas ativas
 `sudo ufw allow nnumero_porta` | acessa e cria uma porta para ser o firewall
 `nano /etc/pam.d/common-password` | acessa o arquivo para alterar a polica de senhas
-
-
-
 sudo nano /etc/ssh/sshd_config | arquivo de config de porta
 Port 4242 | ativa
 getent passwd pamela | confirmar user
 sudo adduser pamela | criar user
 sudo usermod -aG sudo pamela | NAO SEI
-
-sudo systemctl enable ssh
+sudo systemctl enable ssh | 
 
 ______________________________
 
@@ -1020,6 +1016,7 @@ ______________________________
 VERIFICAR!!!!
 sudo apt remove aptitude
 
+-------------------------------
 
 
 # Subject - PT
