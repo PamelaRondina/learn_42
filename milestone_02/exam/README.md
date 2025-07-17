@@ -10,6 +10,7 @@ ft_strcpy.c | 01 | [ft_strcpy_01](https://github.com/PamelaRondina/learn_42/blob
 ft_strlen.c | 01 | [ft_strlen_01](https://github.com/PamelaRondina/learn_42/blob/main/milestone_02/exam/level%2001/ft_strlen.c)
 ft_swap.c | 01 | [ft_swap_01](https://github.com/PamelaRondina/learn_42/blob/main/milestone_02/exam/level%2001/ft_swap.c)
 repeat_alpha.c | 01 | [repeat_alpha_01]()
+rev_print.c | 01 | [rev_print_01]()
 
 ------------------
 
