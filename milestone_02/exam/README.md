@@ -18,6 +18,9 @@ ulstr.c | 01 | [ulstr.c](https://github.com/PamelaRondina/learn_42/blob/main/mil
  alpha_mirror.c | 02 | [alpha_mirror.c](https://github.com/PamelaRondina/learn_42/blob/main/milestone_02/exam/level%2002/%20alpha_mirror.c)
  camel_to_snake.c | 02 | [camel_to_snake.c](https://github.com/PamelaRondina/learn_42/tree/main/milestone_02/exam)
  do_op.c | 02 | [do_op]()
+ ft_atoi.c | 02 | [ft_atoi.c]()
+ 
+
 
 
 
